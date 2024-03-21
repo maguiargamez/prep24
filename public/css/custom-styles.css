@@ -1,0 +1,82 @@
+/*[data-kt-app-layout="light-sidebar"] .app-sidebar {
+  background-color: #393945;
+  color: #FFF;
+}
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active {
+    transition: color 0.2s ease;
+    //background-color: #226d78;
+    background-color: #393945;
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link {
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link .menu-title {
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) {
+    transition: color 0.2s ease;
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-title {
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon, [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon .svg-icon, [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon i {
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title {
+    color: #FFF;
+  }
+
+  .menu-item .menu-link .menu-link.active .menu-bullet {
+    color: #FFF;
+  }
+
+  .menu-link.active i.bi, i[class^="fonticon-"], i[class*=" fonticon-"], i[class^="fa-"], i[class*=" fa-"], i[class^="la-"], i[class*=" la-"] {
+    color: #FFF;
+  }
+
+  [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon, [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon .svg-icon, [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon i {
+    color: #FFF;
+  }
+  */
+
+  .breadcrumb-right .breadcrumb-item:after {
+    content: ">";
+    padding-left: 5px;
+  }
+
+  .page-item .active .page-link{
+    background-color: #226d78;
+  }
+
+  .page-link.active, .active > .page-link {
+    background-color: #226d78;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; 
+  border-top: 16px solid #34db55; 
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
