@@ -27,20 +27,24 @@ class AuthController extends Controller
         ){
             $roles= $this->getRoles();
             $user= User::find(auth()->user()->id);
-            if(!$user->hasRole($roles))
-            {
+            //if(!$user->hasRole($roles))
+            //{
                 //$this->guard()->logout();
                 //$request->session()->invalidate();
                 //auth()->user()->tokens()->delete();
-                return [
+                /*return [
                     'message' => 'Sesión cerrada, no tiene los privilegios requeridos'
-                ];
-            }    
+                ];*/
+            //} 
+
+            $userData= User::getUserData(auth()->user()->id);
+
             return $this->success([
-                'token' => auth()->user()->createToken('API Token')->plainTextToken
+                'Token' => auth()->user()->createToken('API Token')->plainTextToken,
+                'Usuario' => $userData
             ], 'Sesión iniciada');
         }else{
-            return $this->error('No se encontraron las credenciale de acceso', 401);
+            return $this->error('No se encontraron las credenciales de acceso', 401);
         }
 
 

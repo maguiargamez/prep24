@@ -178,7 +178,7 @@ class PrepCandidatePartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'candidate_id'=> 7,
+                'prep_candidate_id'=> 7,
                 'prep_party_coalition_id'=> 27,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,

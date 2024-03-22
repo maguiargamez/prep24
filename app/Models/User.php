@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -55,5 +55,32 @@ class User extends Authenticatable
             $query
                 ->where('name', 'like', '%'.$term.'%');
         });
+    }
+
+    public static function getUserData($id){
+        $user= User::select(
+            'users.id', 
+            'users.id_personal', 
+            'users.name as nombre', 
+            'users.rfc', 
+            'users.celular', 
+            'users.email', 
+            'p_personal.dtto_loc as distrito_local',
+            'p_personal.id_municipio',
+            'c_municipio.clave as clave_municipio',
+            'c_municipio.municipio',
+            'p_personal.id_seccion',
+            'c_seccion.seccion',
+            DB::raw("(SELECT GROUP_CONCAT(roles.name) FROM `model_has_roles` join roles on roles.id=model_has_roles.role_id  WHERE model_id=users.id) as `roles`")
+        )
+        ->leftJoin('p_personal', 'p_personal.id', '=', 'users.id_personal')
+        ->leftJoin('c_municipio', 'c_municipio.id', '=', 'p_personal.id_municipio')
+        ->leftJoin('c_seccion', 'c_seccion.id', '=', 'p_personal.id_seccion')
+        ->where('users.id', $id)
+        ->orderBy('users.id', 'desc')
+        ;
+
+        $user= $user->first();
+        return $user;
     }
 }
