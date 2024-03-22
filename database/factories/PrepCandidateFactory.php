@@ -2,29 +2,25 @@
 
 namespace Database\Factories;
 
+use App\Models\PrepElection;
+use App\Models\PrepPartyCoalition;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-use App\Models\Candidate;
-use App\Models\Election;
-use App\Models\PartyCoalition;
 
-class CandidateFactory extends Factory
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PrepCandidate>
+ */
+class PrepCandidateFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Candidate::class;
-
-    /**
      * Define the model's default state.
+     *
+     * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-            'election_id' => Election::factory(),
-            'party_coalition_id' => PartyCoalition::factory(),
+            'prep_election_id' => PrepElection::factory(),
+            'prep_party_coalition_id' => PrepPartyCoalition::factory(),
             'key' => $this->faker->regexify('[A-Za-z0-9]{5}'),
             'name' => $this->faker->name,
             'logo' => $this->faker->regexify('[A-Za-z0-9]{255}'),

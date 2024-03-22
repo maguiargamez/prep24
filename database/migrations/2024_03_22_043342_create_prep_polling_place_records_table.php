@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('polling_place_records', function (Blueprint $table) {
+        Schema::create('prep_polling_place_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('election_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('prep_election_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('c_casilla_id')->constrained();
 
             $table->smallInteger('leftover_ballots')->nullable();
@@ -48,6 +48,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('polling_place_records');
+        Schema::dropIfExists('prep_polling_place_records');
     }
 };

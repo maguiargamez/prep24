@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Municipality;
+use App\Models\PrepElectionType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MunicipalitySeeder extends Seeder
+class PrepElectionTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,15 +14,17 @@ class MunicipalitySeeder extends Seeder
     public function run(): void
     {
         $currentDate= date('Y-m-d h:m:s');
-        Municipality::insert([
+        PrepElectionType::insert([
             [
-                'state_id'=> 1,
-                'key' => '07',
-                'name' => 'Tuxtla',
+                'description' => 'Estatal',
+                'created_at' => $currentDate,
+                'updated_at' => $currentDate,
+            ],
+            [
+                'description' => 'Municipal',
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ]
         ]);
-
     }
 }

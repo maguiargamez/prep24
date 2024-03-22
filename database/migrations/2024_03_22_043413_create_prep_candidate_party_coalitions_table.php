@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('candidate_party_coalitions', function (Blueprint $table) {
+        Schema::create('prep_candidate_party_coalitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('candidate_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('party_coalition_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('prep_candidate_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('prep_party_coalition_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('candidate_party_coalitions');
+        Schema::dropIfExists('prep_candidate_party_coalitions');
     }
 };

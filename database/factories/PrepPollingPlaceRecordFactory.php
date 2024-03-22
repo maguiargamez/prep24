@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PollingPlaceRecord>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PrepPollingPlaceRecord>
  */
-class PollingPlaceRecordFactory extends Factory
+class PrepPollingPlaceRecordFactory extends Factory
 {
     /**
      * Define the model's default state.

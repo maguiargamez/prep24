@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('party_coalitions', function (Blueprint $table) {
+        Schema::create('prep_party_coalitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('election_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('prep_election_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('short', 100);
             $table->string('name', 255);
             $table->string('logo', 255);
@@ -26,8 +24,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('party_coalitions');
+        Schema::dropIfExists('prep_party_coalitions');
     }
 };

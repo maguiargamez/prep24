@@ -15,22 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-        \App\Models\User::factory()->create([
-            'name' => 'Administrador',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('adminprep2024'),
-        ]);       
-
-        //$this->call(StateSeeder::class);
-        //$this->call(MunicipalitySeeder::class);
-        $this->call(ElectionTypeSeeder::class);
-        $this->call(ElectionSeeder::class);
         
+        /*$user= \App\Models\User::factory()->create([
+            'name' => 'Administrador Prep',
+            'email' => 'adminprep@gmail.com',
+            'celular' => '9611234567',
+            'password' => Hash::make('adminprep2024'),
+        ]);         
+        $user->assignRole('prep');*/
 
-        $this->call(PartyCoalitionSeeder::class);
-        $this->call(CandidateSeeder::class);
-        //$this->call(PollingPlaceVoteSeeder::class);
-        //$this->call(CandidatePartyCoalitionSeeder::class);
+
+        /*$this->call(PrepElectionTypeSeeder::class);
+        $this->call(PrepElectionSeeder::class);
+        $this->call(PrepPartyCoalitionSeeder::class);
+        $this->call(PrepCandidateSeeder::class);        
+        $this->call(PrepCandidatePartyCoalitionSeeder::class);*/
+
+        $this->call(PrepPollingPlaceVoteSeeder::class);
     }
 }

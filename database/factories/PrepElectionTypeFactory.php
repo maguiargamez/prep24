@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CandidatePartyCoalition>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PrepElectionType>
  */
-class CandidatePartyCoalitionFactory extends Factory
+class PrepElectionTypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class CandidatePartyCoalitionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'description' => $this->faker->text,
         ];
     }
 }

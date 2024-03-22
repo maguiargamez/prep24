@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\PartyCoalition;
+use App\Models\PrepPartyCoalition;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PartyCoalitionSeeder extends Seeder
+class PrepPartyCoalitionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class PartyCoalitionSeeder extends Seeder
     public function run(): void
     {
         $currentDate= date('Y-m-d h:m:s');
-        PartyCoalition::insert([
+        PrepPartyCoalition::insert([
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PAN',
                 'name' => 'PAN',
                 'logo' => 'img/logos/pan.png',
@@ -28,7 +28,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PRI',
                 'name' => 'PRI',
                 'logo' => 'img/logos/pri.png',
@@ -40,7 +40,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PRD',
                 'name' => 'PRD',
                 'logo' => 'img/logos/prd.png',
@@ -52,7 +52,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PT',
                 'name' => 'PT',
                 'logo' => 'img/logos/pt.png',
@@ -64,7 +64,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PV',
                 'name' => 'PV',
                 'logo' => 'img/logos/pv.png',
@@ -76,7 +76,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'MC',
                 'name' => 'MC',
                 'logo' => 'img/logos/mc.png',
@@ -88,7 +88,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'NA',
                 'name' => 'NA',
                 'logo' => 'img/logos/na.png',
@@ -100,7 +100,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'CSU',
                 'name' => 'CSU',
                 'logo' => 'img/logos/csu.png',
@@ -112,7 +112,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'MOR',
                 'name' => 'Morena',
                 'logo' => 'img/logos/mor.png',
@@ -124,7 +124,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PES',
                 'name' => 'PES',
                 'logo' => 'img/logos/pes.png',
@@ -136,7 +136,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'MCS',
                 'name' => 'MCS',
                 'logo' => 'img/logos/mcs.png',
@@ -148,7 +148,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PAN-PRD-MC',
                 'name' => 'PAN-PRD-MC',
                 'logo' => 'img/logos/PAN-PRD-MC.png',
@@ -160,7 +160,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PAN-PRD',
                 'name' => 'PAN-PRD',
                 'logo' => 'img/logos/PAN-PRD.png',
@@ -172,7 +172,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PAN-MC',
                 'name' => 'PAN-MC',
                 'logo' => 'img/logos/PAN-MC.png',
@@ -184,7 +184,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PRD-MC',
                 'name' => 'PRD-MC',
                 'logo' => 'img/logos/PRD-MC.png',
@@ -196,7 +196,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PT-MOR-PES',
                 'name' => 'PT-MOR-PES',
                 'logo' => 'img/logos/PT-MOR-PES.png',
@@ -208,7 +208,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PT-MOR',
                 'name' => 'PT-MOR',
                 'logo' => 'img/logos/PT-MOR.png',
@@ -220,7 +220,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PT-PES',
                 'name' => 'PT-PES',
                 'logo' => 'img/logos/PT-PES.png',
@@ -232,7 +232,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'MOR-PES',
                 'name' => 'MOR-PES',
                 'logo' => 'img/logos/MOR-PES.png',
@@ -244,7 +244,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PRI-NA',
                 'name' => 'PRI-NA',
                 'logo' => 'img/logos/PRI-NA.png',
@@ -256,7 +256,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PV-CSU-MCS',
                 'name' => 'PV-CSU-MCS',
                 'logo' => 'img/logos/PV-CSU-MCS.png',
@@ -268,7 +268,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PV-CSU',
                 'name' => 'PV-CSU',
                 'logo' => 'img/logos/PV-CSU.png',
@@ -280,7 +280,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'PV-MCS',
                 'name' => 'PV-MCS',
                 'logo' => 'img/logos/PV-MCS.png',
@@ -292,7 +292,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'CSU-MCS',
                 'name' => 'CSU-MCS',
                 'logo' => 'img/logos/CSU-MCS.png',
@@ -304,7 +304,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'indep_1',
                 'name' => 'indep_1',
                 'logo' => 'img/logos/indep_1.png',
@@ -316,7 +316,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'Candidatura no registrada',
                 'name' => 'Candidatura no registrada',
                 'logo' => null,
@@ -328,7 +328,7 @@ class PartyCoalitionSeeder extends Seeder
                 'updated_at' => $currentDate,
             ],
             [
-                'election_id'=> 1,
+                'prep_election_id'=> 1,
                 'short' => 'Votos nulos',
                 'name' => 'Votos nulos',
                 'logo' => null,

@@ -11,19 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('elections', function (Blueprint $table) {
+        Schema::create('prep_election_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('election_type_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedBigInteger('state_id');
-            $table->foreignId('municipality_id')->nullable()->constrained();
             $table->string('description', 255);
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -31,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('elections');
+        Schema::dropIfExists('prep_election_types');
     }
 };
