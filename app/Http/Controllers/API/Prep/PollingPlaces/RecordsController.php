@@ -75,7 +75,7 @@ class RecordsController extends Controller
                 return $this->error("Acceso denegado: el usuario no cuenta con el rol requerido", 401);
             } 
 
-            $municipalities= CCasilla::getMunicipalities($user);
+            $municipalities= CCasilla::getMunicipalities($user, $request);
             return $this->success([
                 "Total"=> count($municipalities),
                 "Municipios"=>$municipalities
