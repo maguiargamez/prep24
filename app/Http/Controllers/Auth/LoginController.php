@@ -45,7 +45,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        return redirect('/dashboard/entidad');
+        return redirect('/actas/casillas');
         //Check user role, if it is not admin then logout
         /*$roles= $this->getCrmRoles();
         if(!$user->hasRole($roles))

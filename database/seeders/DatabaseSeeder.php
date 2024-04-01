@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PrepCandidateSeeder::class);        
         $this->call(PrepCandidatePartyCoalitionSeeder::class);
 
-        //$this->call(PrepPollingPlaceVoteSeeder::class);
+        $this->call(PrepPollingPlaceVoteSeeder::class);
     }
 }

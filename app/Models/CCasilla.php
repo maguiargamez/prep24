@@ -4,11 +4,84 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class CCasilla extends Model
 {
     use HasFactory;
 
+
+    public static function getCaptureRecords($electionId=null){
+        $query= PrepPollingPlaceRecord::where('is_captured', true)->whereNotNull('digitized_record')->count();
+        return $query;
+    }
+
+    public static function getTotalRecords($electionId=null){
+        $query= CCasilla::count();
+        return $query;
+    }    
+
+    public static function getDistrictsComboRoman($municipalityKey=null, $electionId=null){
+        $districts= CCasilla::select(
+            DB::raw("CAST(c_casillas.dtto_loc AS UNSIGNED) as dtto_loc"),
+            'dtto_loc as district'
+            );
+
+        if($municipalityKey){
+            $districts= $districts->where('c_casillas.id_municipio', $municipalityKey);
+        }
+
+        $districts= $districts    
+            ->groupBy('dtto_loc')
+            ->orderBy('dtto_loc', 'asc')
+            ->pluck('district', 'dtto_loc');
+
+        foreach($districts as $key=>$dist){            
+            //$districts[$key]= "Distrito ".Convertion::toRoman((int)$dist);
+            $districts[$key]= "Distrito ".(int)$dist;
+        }
+
+        return $districts;
+    }
+
+    public static function getMunicipalitiesCombo($electionId=null){
+        $municipalities= CCasilla::select(
+            'id_municipio',
+            'c_municipio.municipio',            
+            )
+            ->leftJoin('c_municipio', 'c_municipio.id', '=', 'c_casillas.id_municipio')
+            ->groupBy('id_municipio')
+            ->orderBy('id_municipio', 'asc')
+            ->pluck('municipio', 'id_municipio');
+
+        return $municipalities;
+    }
+
+    public static function getSectionsCombo($municipalityKey=null, $district=null, $electionId=null){
+        $sections= CCasilla::select(
+            DB::raw("CAST(c_casillas.seccion AS UNSIGNED) as seccion"),
+            DB::raw('concat( "Sección ", c_casillas.seccion) as section_desc')
+            
+            );
+
+        if($municipalityKey){
+            $sections= $sections->where('c_casillas.id_municipio', $municipalityKey);
+        }
+
+        if($district){
+            $sections= $sections->where('c_casillas.dtto_loc', $district);
+        }
+
+        $sections= $sections    
+            ->groupBy('seccion')
+            ->orderBy('seccion', 'asc')
+            ->pluck('section_desc', 'seccion');
+
+        return $sections;
+    }
+
+    //################### API ###################  
+    
     public static function withOutRecords(User $user, $request=null){
         $pollingPlaces= CCasilla::select(
             'c_casillas.id as id_casilla',
@@ -213,4 +286,6 @@ class CCasilla extends Model
         $pollingPlaces= $pollingPlaces->first();
         return $pollingPlaces;
     }
+
+    //################# API END ################
 }

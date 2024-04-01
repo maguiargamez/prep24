@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="menu-item">
+    {{-- <div class="menu-item">
         <a class="menu-link @if(Str::is('dashboard.home*', $currentRouteName)) active @endif" href="{{ route('dashboard.home') }}">
             <span class="menu-icon">
                 <span class="svg-icon svg-icon-2">
@@ -57,7 +57,7 @@
             </span>
             <span class="menu-title">Sección</span>
         </a>
-    </div>
+    </div> --}}
 
     <div class="menu-item pt-5">
         <div class="menu-content">
@@ -67,7 +67,7 @@
 
 
     <div class="menu-item">
-        <a class="menu-link @if(Str::is('captura*', $currentRouteName)) active @endif" href="{{ route('capture.polling-places.index') }}">
+        <a class="menu-link @if(Str::is('records.polling-places*', $currentRouteName)) active @endif" href="{{ route('records.polling-places.index') }}">
             <span class="menu-icon">
                 <span class="svg-icon svg-icon-2">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,24 +130,6 @@
             <span class="menu-title">Candidatos</span>
         </a>
     </div>
-
-    <div class="menu-item">
-        <a class="menu-link @if(Str::is('polling-places*', $currentRouteName)) active @endif" href="{{ route('polling-places.index') }}">
-            <span class="menu-icon">
-                <span class="svg-icon svg-icon-2">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path opacity="0.3" d="M7 20.5L2 17.6V11.8L7 8.90002L12 11.8V17.6L7 20.5ZM21 20.8V18.5L19 17.3L17 18.5V20.8L19 22L21 20.8Z" fill="currentColor"></path>
-                        <path d="M22 14.1V6L15 2L8 6V14.1L15 18.2L22 14.1Z" fill="currentColor"></path>
-                    </svg>
-                </span>
-            </span>
-            <span class="menu-title">Casillas</span>
-        </a>
-    </div>
-
-
-
- 
 
 
     
