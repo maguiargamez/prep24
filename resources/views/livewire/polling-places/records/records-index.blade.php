@@ -208,12 +208,13 @@
                                             </td>
                                           
                                             <td align="right">
-                                                <a class="btn btn-icon btn-bg-warning btn-active-color-default btn-sm" href="{{ route('capture.records.polling-place', $item) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Capturar información">
+                                                <a class="btn btn-icon btn-bg-warning btn-active-color-default btn-sm" href="{{ route('records.polling-places.record.index', $item) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Capturar información">
                                                     <span class="svg-icon svg-icon-3">
                                                         <i class="fa-solid fa-pen-to-square text-white"></i>
                                                     </span>
                                                 </a>
                                             </td>
+
                                         </tr>
                                         
                                     @endforeach

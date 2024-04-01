@@ -47,7 +47,7 @@ class RecordsIndex extends Component
     public $title = 'Casillas';
     public $breadcrumb = [
         "Captura de información"=> null,
-        "Casillas" => 'capture.polling-places.index',   
+        "Casillas" => 'records.polling-places.index',   
     ];
 
     public function render()

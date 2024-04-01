@@ -14,6 +14,7 @@ use App\Http\Livewire\Parties\PartyForm;
 use App\Http\Livewire\PollingPlaces\PollingPlaceForm;
 use App\Http\Livewire\PollingPlaces\PollingPlaceImport;
 use App\Http\Livewire\PollingPlaces\PollingPlaces;
+use App\Http\Livewire\PollingPlaces\Records\RecordForm as RecordsRecordForm;
 use App\Http\Livewire\PollingPlaces\Records\RecordsIndex;
 use App\Http\Livewire\Records\Captures\RecordCaptures;
 use App\Http\Livewire\Records\Captures\RecordDistrict;
@@ -85,6 +86,7 @@ Route::middleware([
     Route::prefix('actas')->group(function () {
 
         Route::get('/casillas', RecordsIndex::class)->name('records.polling-places.index');
+        Route::get('/casillas/capturar/{cCasilla}/acta', RecordsRecordForm::class)->name('records.polling-places.record.index');
 
         Route::get('/', Records::class)->name('records.index');
 
