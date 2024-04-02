@@ -54,7 +54,8 @@ return [
     |
     */
 
-    'asset_url' => 'https://estructurasweb24.com.mx/prep24',
+    //'asset_url' => 'https://estructurasweb24.com.mx/prep24',
+    'asset_url' => null,
 
     /*
     |--------------------------------------------------------------------------

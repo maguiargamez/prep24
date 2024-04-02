@@ -162,14 +162,14 @@
 
 
                             <div class="input-group mb-8">
-                            <input wire:model="digitizedRecord" type="file" class="form-control @error('digitizedRecord')  is-invalid @enderror">  
+                                <input wire:model="digitizedRecord" type="file" class="form-control @error('digitizedRecord')  is-invalid @enderror">  
 
-                            @error('digitizedRecord')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                @error('digitizedRecord')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                             @enderror
-                        </div>
+                            </div>
                             
                             @if($pollingPlace->digitized_record)
                                 <div class="overflow-auto pb-5">
