@@ -10,13 +10,15 @@ class PrepPollingPlaceVote extends Model
     use HasFactory;
 
     protected $fillable = [
-        'polling_place_id',
-        'party_coalition_id',
+        'prep_election_id',
+        'prep_polling_place_record_id',
+        'prep_party_coalition_id',
         'votes',
     ];
 
     protected $casts = [
         'id' => 'integer',
+        'prep_election_id' => 'integer',
         'prep_polling_place_record_id' => 'integer',
         'prep_party_coalition_id' => 'integer',
         'votes' => 'integer',

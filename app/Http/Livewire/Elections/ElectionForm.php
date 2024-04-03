@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Elections;
 use App\Models\Election;
 use App\Models\ElectionType;
 use App\Models\Municipality;
+use App\Models\PrepElection;
+use App\Models\PrepElectionType;
 use App\Models\State;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +21,7 @@ class ElectionForm extends Component
 
     public $municipalities;
     public $currentRouteName= '';
-    public Election $election;
+    public PrepElection $prepElection;
     /*protected $rules = [  
         'election.election_type_id'=> ['required'],
         'election.state_id'=> ['required'],
@@ -28,26 +30,26 @@ class ElectionForm extends Component
     ];*/
 
     protected function rules() {
-
-        if($this->election->election_type_id==1){
+        /*if($this->election->election_type_id==1){
             return [  
-                'election.election_type_id'=> ['required'],
-                'election.state_id'=> ['required'],
-                'election.municipality_id'=> [],
-                'election.description'=> ['required'],
+                'prepElection.election_type_id'=> ['required'],
+                'prepElection.state_id'=> ['required'],
+                'prepElection.municipality_id'=> [],
+                'prepElection.description'=> ['required'],
             ];
         }else{
             return [  
-                'election.election_type_id'=> ['required'],
-                'election.state_id'=> ['required'],
-                'election.municipality_id'=> ['required'],
-                'election.description'=> ['required'],
+                'prepElection.election_type_id'=> ['required'],
+                'prepElection.state_id'=> ['required'],
+                'prepElection.municipality_id'=> ['required'],
+                'prepElection.description'=> ['required'],
             ];
-        }
-      
+        }*/
+        return [  
+            'prepElection.prep_election_type_id'=> ['required'],
+            'prepElection.description'=> ['required'],
+        ]; 
     }
-
-
 
     public function updated($propertyName)
     {
@@ -56,24 +58,23 @@ class ElectionForm extends Component
 
     public function updatedElectionStateId()
     {
-        $this->municipalities= Municipality::where('state_id', $this->election->state_id)->pluck('name', 'id');
+        //$this->municipalities= Municipality::where('state_id', $this->election->state_id)->pluck('name', 'id');
         //dd($this->municipalities);
     }
 
-
-    public function mount(Election $election)
+    public function mount(PrepElection $election)
     {
         
         $this->currentRouteName= Route::currentRouteName();
-        $this->election= $election;
+        $this->prepElection= $election;
         
         if($election->id!=null){
             $this->breadcrumb["Editar"]= 'elections.edit';
-            if($this->election->election_type_id==2){
+            /*if($this->election->election_type_id==2){
                 $this->municipalities= Municipality::where('state_id', $this->election->state_id)->pluck('name', 'id');
-            }
+            }*/
         }else{
-            $this->election->outstanding=1;
+            
             $this->breadcrumb["Crear"]= 'elections.create';
         }
     }
@@ -81,8 +82,8 @@ class ElectionForm extends Component
     public function render()
     {
         return view('livewire.elections.election-form',[
-            'electionTypes' => ElectionType::pluck('description', 'id'),
-            'states' => State::pluck('name', 'id'),
+            'electionTypes' => PrepElectionType::pluck('description', 'id'),
+            /*'states' => State::pluck('name', 'id'),*/
         ]);
     }
 
@@ -90,12 +91,9 @@ class ElectionForm extends Component
     {
         $this->validate();
         try{
-
             DB::beginTransaction();
-
-
             //dd($this->benefit->outstanding);
-            $this->election->save();
+            $this->prepElection->save();
             DB::commit(); 
 
             session()->flash('flashStatus', __('Registro realizado correctamente'));

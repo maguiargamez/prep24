@@ -120,7 +120,7 @@
                                     <div class="row">
                                         <span class="badge badge-primary badge-lg">
                                         Total de registros:                                        
-                                            {{ $items->total() }}
+                                            {{ number_format($items->total()) }}
                                         </span>                                        
                                     </div>
                                 </div>
@@ -182,26 +182,23 @@
                                             </td>
                                             <td>{{ $item->type }}</td>
                                             <td class="text-center">
+
+                                                @if($item->is_captured)
+                                                    @if($item->capture_source==2)                                                        
+                                                        <i class="fa-solid fa-mobile-screen-button fs-4"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-computer fs-4"></i>
+                                                    @endif 
+                                                @else
+                                                    <i class="fa-solid fa-clock fs-4"></i>
+                                                @endif
+
                                                 @if($item->digitized_record)
                                                     <a wire:click.prevent="downloadFile('{{ $item->digitized_record }}')" class="text-primary fw-bold" href="#">
-                                                        <i class="fa-solid fa-file text-primary fs-4"></i>
-                                                        @if($item->capture_source==1)
-                                                            <i class="fa-solid fa-print text-primary fs-4"></i>
-                                                        @else
-                                                            <i class="fa-solid fa-mobile-screen-button text-primary fs-4"></i>
-                                                        @endif 
+                                                        <i class="fa-solid fa-file text-primary fs-4"></i>                                                        
                                                     </a>
-                                                @else
-                                                    <i class="fa-solid fa-file fs-4"></i>
-                                                    @if($item->is_captured)
-                                                    @if($item->capture_source==1)
-                                                        <i class="fa-solid fa-print fs-4"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-mobile-screen-button fs-4"></i>
-                                                    @endif 
-                                                    @endif 
-                                                    
                                                 @endif
+
                                             </td>
                                             <td class="text-center fw-bold fs-6 text-gray-800">
                                                 <span class="badge badge-secondary badge-lg">{{$item->updated_at }}</span>

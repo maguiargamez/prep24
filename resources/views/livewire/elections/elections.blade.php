@@ -98,7 +98,7 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {            
-                Livewire.emitTo('inventory.benefits.benefits','destroy', itemId);
+                Livewire.emitTo('elections.elections','destroy', itemId);
                 Swal.fire(
                     'Eliminado',
                     'El registro ha sido eliminado!',
@@ -123,7 +123,7 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {            
-                Livewire.emitTo('inventory.benefits.benefits','destroySelected');
+                Livewire.emitTo('elections.elections','destroySelected');
                 Swal.fire(
                     'Eliminado',
                     'Los registros han sido eliminado!',

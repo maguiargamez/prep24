@@ -32,8 +32,6 @@
                     </div>
                 </div>
 
-
-
                 <div id="kt_account_settings_profile_details" class="collapse show">
                         <div class="card-body border-top p-9">
 
@@ -55,8 +53,8 @@
                                     <div class="row">
                                         <div class="input-group mb-5">
                                             <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                                            <x-select wire:model="election.election_type_id" :options="$electionTypes" placeholder="Seleccionar" id="election_type_id"></x-select>
-                                            @error('election.election_type_id')
+                                            <x-select wire:model="prepElection.prep_election_type_id" :options="$electionTypes" placeholder="Seleccionar" id="prepElection.prep_election_type_id"></x-select>
+                                            @error('prepElection.prep_election_type_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -71,10 +69,10 @@
                                 <div class="col-lg-10">
                                     <div class="row">
                                         <div class="input-group mb-5">
-                                            <span class="input-group-text" id="election.description"><i class="fa-solid fa-list-ol"></i></span>
-                                            <input wire:model="election.description" type="text" class="form-control @error('election.description')  is-invalid @enderror">
+                                            <span class="input-group-text" id="prepElection.description"><i class="fa-solid fa-list-ol"></i></span>
+                                            <input wire:model="prepElection.description" type="text" class="form-control @error('prepElection.description')  is-invalid @enderror">
                                             
-                                            @error('election.description')
+                                            @error('prepElection.description')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -84,39 +82,7 @@
                                 </div>
                             </div>  
                             
-                            <div class="row mb-6">
-                                <label class="col-lg-2 col-form-label fw-semibold fs-6">Estado*</label>
-                                <div class="col-lg-10">
-                                    <div class="row">
-                                        <div class="input-group mb-5">
-                                            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                                            <x-select wire:model="election.state_id" :options="$states" placeholder="Seleccionar" id="state_id"></x-select>
-                                            @error('election.state_id')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-6">
-                                <label class="col-lg-2 col-form-label fw-semibold fs-6">Municipio</label>
-                                <div class="col-lg-10">
-                                    <div class="row">
-                                        <div class="input-group mb-5">
-                                            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                                            <x-select wire:model="election.municipality_id" :options="$municipalities" placeholder="Seleccionar" id="municipality_id"></x-select>
-                                            @error('election.municipality_id')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    
                                
 
                         </div>

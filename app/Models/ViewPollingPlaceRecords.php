@@ -96,11 +96,21 @@ class ViewPollingPlaceRecords extends Model
     }
 
     public static function getCaptureRecords($electionId=null){
-        $query= ViewPollingPlaceRecords::where('is_captured', true)->whereNotNull('digitized_record')->count();
+        $query= ViewPollingPlaceRecords::where('is_captured', true)->count();
+        return $query;
+    }
+
+    public static function getPendingdsRecords($electionId=null){
+        $query= ViewPollingPlaceRecords::where('is_captured', false)->count();
         return $query;
     }
 
     public static function getTotalRecords($electionId=null){
+        $query= ViewPollingPlaceRecords::count();
+        return $query;
+    }
+
+    public static function getTotalPendingsRecords($electionId=null){
         $query= ViewPollingPlaceRecords::count();
         return $query;
     }

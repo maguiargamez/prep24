@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="save" enctype="multipart/form-data">
         <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
             <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                 <x-breadcrumb 
@@ -14,14 +14,38 @@
                 </div>
             </div>
         </div>
+
         <div id="kt_app_content_container" class="app-container container-xxl">
 
             <div class="col-lg-12" wire:loading wire:target="save">
                 <x-loaders.loading-form></x-loaders.loading-form>
             </div>
 
-            <div class="card">
+            <div wire:loading.remove wire:target="save" class="card">
                 <div class="card-body p-lg-12">
+                    @if(session('flashStatus'))
+                    <div class="alert alert-success d-flex align-items-center p-5 mb-10">          
+                        <div class="d-flex flex-column">
+                            <h4 class="mb-1 text-success">Exito!</h4>
+                            <span>{{ session('flashStatus') }}</span>
+                        </div>
+                        <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    @endif
+
+                    @if(session('flashError'))
+                        <div class="alert alert-danger d-flex align-items-center p-5 mb-10">          
+                            <div class="d-flex flex-column">
+                                <h4 class="mb-1 text-danger">Error!</h4>
+                                <span>{{ session('flashError') }}</span>
+                            </div>
+                            <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    @endif
                     <div class="flex-lg-row-fluid me-xl-18">
                         <div class="mt-n1">
                             <div class="m-0">
@@ -167,13 +191,13 @@
                                                 </label>
 
                                                 <div class="input-group mb-10">
-                                                    <input wire:model="digitizedRecord" type="file" class="form-control @error('digitizedRecord')  is-invalid @enderror">  
+                                                    <input wire:model="digitizedRecord" type="file" class="form-control @error('digitizedRecord') is-invalid @enderror">  
                     
                                                     @error('digitizedRecord')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
                                                         </div>
-                                                @enderror
+                                                    @enderror
                                                 </div>
                                                 
                                                 @if($prepPollingPlaceRecord->digitized_record)

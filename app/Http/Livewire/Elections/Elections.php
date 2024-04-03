@@ -6,6 +6,7 @@ use App\Http\Traits\WithSelectionItems;
 use Livewire\Component;
 use App\Http\Traits\WithSorting;
 use App\Models\Election;
+use App\Models\PrepElection;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ class Elections extends Component
     protected $paginationTheme = 'bootstrap';
     public $title = 'Elecciones';
     public $breadcrumb = [
-        "Elecciones" => null,   
+        "Elecciones" => 'elections.index',   
     ];
 
     public $currentRouteName= '';
@@ -67,11 +68,8 @@ class Elections extends Component
 
     public function getItemsQueryProperty()
     {
-        return Election::query()
+        return PrepElection::query()
             ->search(trim($this->search))
-            ->with('electionType')
-            ->with('state')
-            ->with('municipality')
             ->orderBy($this->sortBy, $this->sortDirection);
     }
 
@@ -82,13 +80,13 @@ class Elections extends Component
 
     public function destroy($id)
     {
-        Election::find($id)->delete();
+        PrepElection::find($id)->delete();
     }
 
     public function destroySelected(){
 
         foreach($this->selectedItems as $key => $idItem){
-            Election::find((int)$idItem)->delete();
+            PrepElection::find((int)$idItem)->delete();
         }
         $this->resetPage();
     }

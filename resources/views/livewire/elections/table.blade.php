@@ -23,13 +23,7 @@
                     Descripción
                 </th>
 
-                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 200px;">
-                    Estado
-                </th>
 
-                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 200px;">
-                    Municipio
-                </th>
 
                 <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 200px;">Acciones</th>
 
@@ -57,17 +51,7 @@
 
                     <td class="align-items-center">     
                         {{ $item->description }}
-                    </td>
-
-                    <td class="align-items-center">     
-                        {{ $item->state->name }}
-                    </td>
-
-                    <td class="align-items-center">     
-                        {{ $item->municipality->name }}
-                    </td>
-                    
-                   
+                    </td>                  
 
                     <td class="text-end" data-kt-filemanager-table="action_dropdown">
 

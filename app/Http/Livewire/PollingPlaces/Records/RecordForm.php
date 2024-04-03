@@ -31,7 +31,7 @@ class RecordForm extends Component
     public $partiesCoalitions= [];
     public $partiesCoalitionsValues= [];
     public $digitizedRecordSize= null;
-    public $digitizedRecord= null;
+    public $digitizedRecord;
 
     protected function rules() {
         return [              
@@ -41,16 +41,7 @@ class RecordForm extends Component
             'prepPollingPlaceRecord.voters_sum'=> ['required', 'integer'],
             'prepPollingPlaceRecord.votes_taken_urn'=> ['required', 'integer'],            
             'prepPollingPlaceRecord.votes_matched_urn'=> ['required', 'integer'],
-
-            'prepPollingPlaceRecord.votes_matched'=> ['nullable'],
-            'prepPollingPlaceRecord.president'=> ['nullable'],
-            'prepPollingPlaceRecord.first_secretary'=> ['nullable'],
-            'prepPollingPlaceRecord.second_secretary'=> ['nullable'],
-            'prepPollingPlaceRecord.first_scrutineer'=> ['nullable'],
-            'prepPollingPlaceRecord.second_scrutineer'=> ['nullable'],
-            'prepPollingPlaceRecord.third_scrutineer'=> ['nullable'],
-            'prepPollingPlaceRecord.observations'=> ['nullable'],
-            'prepPollingPlaceRecord.digitized_record'=> [                
+            'digitizedRecord'=> [                
                 'nullable',
                 Rule::when($this->digitizedRecord, ['mimes:jpg,jpeg,png,pdf'])
             ],
@@ -137,15 +128,17 @@ class RecordForm extends Component
             $this->prepPollingPlaceRecord->is_validated= false;
             if($this->digitizedRecord){
                 $this->prepPollingPlaceRecord->digitized_record= $this->digitizedRecord->store('actas');
+                //dd($this->prepPollingPlaceRecord->digitized_record);
             }
             $this->prepPollingPlaceRecord->capture_source= 1; 
             $this->prepPollingPlaceRecord->save();
 
 
             foreach($this->partiesCoalitionsValues as $key=>$value){                 
-                $pollinPlaceVotes= PrepPollingPlaceVote::firstOrCreate(['prep_polling_place_record_id' => $this->prepPollingPlaceRecord->id, 'prep_party_coalition_id' => $key]);
+                $pollinPlaceVotes= PrepPollingPlaceVote::firstOrCreate(['prep_election_id' => 1, 'prep_polling_place_record_id' => $this->prepPollingPlaceRecord->id, 'prep_party_coalition_id' => $key]);
+                //dd($pollinPlaceVotes);
                 $pollinPlaceVotes->prep_election_id= 1;
-                $pollinPlaceVotes->prep_polling_place_id= $this->cCasilla->id;
+                $pollinPlaceVotes->prep_polling_place_record_id= $this->prepPollingPlaceRecord->id;
                 $pollinPlaceVotes->prep_party_coalition_id= $key; 
                 $pollinPlaceVotes->votes= $value;
                 $pollinPlaceVotes->save();
@@ -157,7 +150,7 @@ class RecordForm extends Component
 
         }catch (\Exception $e) {
             session()->flash('flashError', __($e->getMessage()));
-            dd($e->getMessage());
+            //ddd($e->getMessage());
             DB::rollback();                       
         }
     }

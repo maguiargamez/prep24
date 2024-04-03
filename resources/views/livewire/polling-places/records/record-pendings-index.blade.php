@@ -23,14 +23,14 @@
         <div class="card mb-5">
             <div class="card-body">
                 <div class="mb-10">
-                    <h1 class="fs-2x text-dark mb-2">Avance</h1>
+                    <h1 class="fs-2x text-dark mb-2">Pendiente de captura</h1>
                     
                 </div>
 
                 <div class="row g-10">
                     <div class="col-sm-3">
                         <div class="mb-5">
-                            <span class="text-gray-500 pt-1 fw-semibold fs-6">Actas capturadas:</span>
+                            <span class="text-gray-500 pt-1 fw-semibold fs-6">Actas pendientes de captura:</span>
                             <div class="d-flex align-items-center mb-2">
                                 <span class="fs-2x  text-gray-800 me-2 lh-1 ls-n2">
                                     {{ number_format($capturedRecords)." de " }}
@@ -78,10 +78,6 @@
                             <x-select wire:model="filterSection" :options="$sections" placeholder="Seleccionar" id="filterSection" class="form-select form-select-solid fw-bold"></x-select>
                         </div>
                         <div class="mb-5">
-                            <label class="form-label fw-bold fs-6 text-gray-700">Información</label>
-                            <x-select wire:model="filterIsCaptured" :options="$sourcesCapture" placeholder="Seleccionar" id="filterIsCaptured" class="form-select form-select-solid fw-bold"></x-select>
-                        </div>
-                        <div class="mb-5">
                             <label class="form-label fw-bold fs-6 text-gray-700">Origen de captura</label>
                             <x-select wire:model="filterCaptureSource" :options="$sources" placeholder="Seleccionar" id="filterCaptureSource" class="form-select form-select-solid fw-bold"></x-select>
                         </div>
@@ -120,7 +116,7 @@
                                     <div class="row">
                                         <span class="badge badge-primary badge-lg">
                                         Total de registros:                                        
-                                            {{ $items->total() }}
+                                            {{ number_format($items->total()) }}
                                         </span>                                        
                                     </div>
                                 </div>
@@ -182,25 +178,20 @@
                                             </td>
                                             <td>{{ $item->type }}</td>
                                             <td class="text-center">
+                                                @if($item->is_captured)
+                                                    @if($item->capture_source==2)                                                        
+                                                        <i class="fa-solid fa-mobile-screen-button fs-4"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-computer fs-4"></i>
+                                                    @endif 
+                                                @else
+                                                    <i class="fa-solid fa-clock fs-4"></i>
+                                                @endif
+
                                                 @if($item->digitized_record)
                                                     <a wire:click.prevent="downloadFile('{{ $item->digitized_record }}')" class="text-primary fw-bold" href="#">
-                                                        <i class="fa-solid fa-file text-primary fs-4"></i>
-                                                        @if($item->capture_source==1)
-                                                            <i class="fa-solid fa-print text-primary fs-4"></i>
-                                                        @else
-                                                            <i class="fa-solid fa-mobile-screen-button text-primary fs-4"></i>
-                                                        @endif 
+                                                        <i class="fa-solid fa-file text-primary fs-4"></i>                                                        
                                                     </a>
-                                                @else
-                                                    <i class="fa-solid fa-file fs-4"></i>
-                                                    @if($item->is_captured)
-                                                    @if($item->capture_source==1)
-                                                        <i class="fa-solid fa-print fs-4"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-mobile-screen-button fs-4"></i>
-                                                    @endif 
-                                                    @endif 
-                                                    
                                                 @endif
                                             </td>
                                             <td class="text-center fw-bold fs-6 text-gray-800">
@@ -208,12 +199,13 @@
                                             </td>
                                           
                                             <td align="right">
-                                                <a class="btn btn-icon btn-bg-warning btn-active-color-default btn-sm" href="{{ route('capture.records.polling-place', $item) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Capturar información">
+                                                <a class="btn btn-icon btn-bg-warning btn-active-color-default btn-sm" href="{{ route('records.polling-places.record.index', $item) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Capturar información">
                                                     <span class="svg-icon svg-icon-3">
                                                         <i class="fa-solid fa-pen-to-square text-white"></i>
                                                     </span>
                                                 </a>
                                             </td>
+
                                         </tr>
                                         
                                     @endforeach

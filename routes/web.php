@@ -15,6 +15,7 @@ use App\Http\Livewire\PollingPlaces\PollingPlaceForm;
 use App\Http\Livewire\PollingPlaces\PollingPlaceImport;
 use App\Http\Livewire\PollingPlaces\PollingPlaces;
 use App\Http\Livewire\PollingPlaces\Records\RecordForm as RecordsRecordForm;
+use App\Http\Livewire\PollingPlaces\Records\RecordPendingsIndex;
 use App\Http\Livewire\PollingPlaces\Records\RecordsIndex;
 use App\Http\Livewire\Records\Captures\RecordCaptures;
 use App\Http\Livewire\Records\Captures\RecordDistrict;
@@ -47,8 +48,6 @@ Auth::routes();
 
 /*Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');*/
 
-
-
 Route::middleware([
     'auth:sanctum',
     'verified'
@@ -80,20 +79,13 @@ Route::middleware([
     Route::get('/casillas/{election}/editar', PollingPlaceForm::class)->name('polling-places.edit');
     Route::get('/casillas/importar', PollingPlaceImport::class)->name('polling-places.import');
 
-    Route::get('/captura/casillas', PollingPlacesRecords::class)->name('capture.polling-places.index');
-    Route::get('/captura/casillas/{pollingPlace}/acta', PollingPlacesRecordForm::class)->name('capture.records.polling-place');
-
     Route::prefix('actas')->group(function () {
 
         Route::get('/casillas', RecordsIndex::class)->name('records.polling-places.index');
         Route::get('/casillas/capturar/{cCasilla}/acta', RecordsRecordForm::class)->name('records.polling-places.record.index');
 
-        Route::get('/', Records::class)->name('records.index');
+        Route::get('/casillas/pendientes', RecordPendingsIndex::class)->name('records.polling-places-pendings.index');
 
-        Route::get('/captura-informacion', RecordCaptures::class)->name('records.capture.index');
-        Route::get('/captura-informacion/distrito/{pollingPlace}', RecordDistrict::class)->name('records.district.index');
-        Route::get('/captura-informacion/seccion/{pollingPlace}', RecordSection::class)->name('records.section.index');
-        Route::get('/captura-informacion/casilla/{pollingPlace}', RecordForm::class)->name('records.polling-place.create');
     });
 
     Route::prefix('super-administracion')->group(function () {

@@ -1,26 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\Capture\PollingPlaces;
+namespace App\Http\Livewire\PollingPlaces\Records;
 
 use Livewire\Component;
 use App\Http\Traits\SessionHandler;
 use App\Http\Traits\WithSorting;
 use App\Http\Traits\WithSelectionItems;
-use App\Models\PollingPlace;
+use App\Models\CCasilla;
+use App\Models\ViewPollingPlaceRecords;
 use Illuminate\Support\Facades\DB;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
+use Livewire\WithPagination;
 
-class Records extends Component
+class RecordPendingsIndex extends Component
 {
-    use WithPagination, WithSorting, WithSelectionItems, SessionHandler;
-    protected $paginationTheme = 'bootstrap';
-    public $title = 'Casillas';
-    public $breadcrumb = [
-        "Captura de información"=> null,
-        "Casillas" => 'capture.polling-places.index',   
-    ];
-
     public $currentRouteName= '';
     public $paginate = 10;    
     public $search = '';
@@ -33,14 +26,14 @@ class Records extends Component
     public $electionId= 1;
     public $municipalities= [];
     public $districts= [];
-    public $sections= [];
+    public $sections;
     public $capturedRecords= 0;
     public $totalRecords= 0;
     public $advance= 0;
     public $color="success";
     public $sources= [1=>"PC", 2=>"App"];
     public $sourcesDigitalized= [1=>"Digitalizada", 2=>"Pendiente"];
-    public $sourcesCapture= [1=>"Capturada", 0=>"Pendiente"];
+    public $sourcesCapture= [1=>"Pendiente", 2=>"Capturada"];
 
 
     protected $listeners = [
@@ -49,15 +42,21 @@ class Records extends Component
         'destroySelected'
     ];
 
+    use WithPagination, WithSorting, WithSelectionItems, SessionHandler;
+    protected $paginationTheme = 'bootstrap';
+    public $title = 'Casillas';
+    public $breadcrumb = [
+        "Captura de información"=> null,
+        "Captura pendiente" => 'records.polling-places-pendings.index',   
+    ];
+
     public function render()
     {
-        $this->municipalities= PollingPlace::getMunicipalitiesCombo($this->electionId);        
-        $this->districts= PollingPlace::getDistrictsComboRoman($this->electionId, $this->filterMunicipality);
-        $this->sections= PollingPlace::getSectionsCombo($this->electionId, $this->filterMunicipality, $this->filterDistrict);
-        return view('livewire.capture.polling-places.records', [
+        return view('livewire.polling-places.records.record-pendings-index', [
             'items' => $this->items
         ]);
     }
+    
 
     public function resetVars()
     {
@@ -73,14 +72,14 @@ class Records extends Component
 
     public function updatedFilterMunicipality()
     {
-        $this->districts= PollingPlace::getDistrictsComboRoman($this->electionId, $this->filterMunicipality);
-        $this->sections= PollingPlace::getSectionsCombo($this->electionId, $this->filterMunicipality);
+        $this->districts= CCasilla::getDistrictsComboRoman($this->filterMunicipality);
+        $this->sections= CCasilla::getSectionsCombo($this->filterMunicipality);
         $this->setFilters($this->currentRouteName, ['filterMunicipality', 'filterDistrict', 'filterSection', 'filterCaptureSource', 'filterDigitilized', 'filterIsCaptured']);
     }
 
     public function updatedFilterDistrict()
     {
-        $this->sections= PollingPlace::getSectionsCombo($this->electionId, $this->filterMunicipality, $this->filterDistrict);
+        $this->sections= CCasilla::getSectionsCombo($this->filterMunicipality, $this->filterDistrict);
         $this->setFilters($this->currentRouteName, ['filterMunicipality', 'filterDistrict', 'filterSection', 'filterCaptureSource', 'filterDigitilized', 'filterIsCaptured']);
     }
 
@@ -110,8 +109,8 @@ class Records extends Component
         $this->resetVars();
         $this->currentRouteName= Route::currentRouteName();
 
-        $this->totalRecords= PollingPlace::getTotalRecords($this->electionId);
-        $this->capturedRecords= PollingPlace::getCaptureRecords($this->electionId);
+        $this->totalRecords= ViewPollingPlaceRecords::getTotalRecords($this->electionId);
+        $this->capturedRecords= ViewPollingPlaceRecords::getPendingdsRecords($this->electionId);
 
         if($this->totalRecords>0){
             $this->advance= number_format((($this->capturedRecords*100)/$this->totalRecords),2);
@@ -119,9 +118,12 @@ class Records extends Component
         if($this->advance<=25){ $this->color="danger"; }
         if($this->advance>25 && $this->advance<=75){ $this->color="warning"; }
 
-        $this->getFilters($this->currentRouteName, ['filterMunicipality', 'filterDistrict', 'filterSection', 'filterCaptureSource', 'filterDigitilized', 'filterIsCaptured']);
+        $this->municipalities= CCasilla::getMunicipalitiesCombo();
+        $this->districts= CCasilla::getDistrictsComboRoman($this->filterMunicipality);
+        $this->sections= CCasilla::getSectionsCombo($this->filterMunicipality, $this->filterDistrict);
 
-        
+        $this->getFilters($this->currentRouteName, ['filterMunicipality', 'filterDistrict', 'filterSection', 'filterCaptureSource', 'filterDigitilized', 'filterIsCaptured']);
+             
     }
 
     public function updatingPaginate()
@@ -153,33 +155,15 @@ class Records extends Component
 
     public function getItemsQueryProperty()
     {
-        return PollingPlace::
-            select(
-            'id',
-            'is_captured',
-            'capture_source',
-            'municipality_key',
-            'municipality',
-            DB::raw('concat("Distrito  ", local_district_key) as district'),
-            'local_district_key',
-            'local_district',
-            'section',
-            'section_type',
-            'type',
-            'type_key',
-            'digitized_record',
-            'is_captured',
-            'is_validated',
-            'updated_at',
-            )
-            ->with('election')
+        return ViewPollingPlaceRecords::
+            select('*')
+            ->where("is_captured", 0)
             ->search(trim($this->search))
             ->filterMunicipality($this->filterMunicipality)
             ->filterDistrict($this->filterDistrict)
             ->filterSection($this->filterSection)
             ->filterCaptureSource($this->filterCaptureSource)
             ->filterDigitilized($this->filterDigitilized)
-            ->filterIsCaptured($this->filterIsCaptured)
             ->orderBy($this->sortBy, $this->sortDirection);
     }
 
@@ -191,4 +175,5 @@ class Records extends Component
     public function downloadFile($file){
         return response()->download(public_path($file));
     }
+
 }
