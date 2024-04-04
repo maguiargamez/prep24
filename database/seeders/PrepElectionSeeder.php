@@ -18,7 +18,7 @@ class PrepElectionSeeder extends Seeder
             [
                 'prep_election_type_id'=> 1,
                 'state_id' => 1,
-                'description' => 'Elecciones Estatales de Chiapas 2018',
+                'description' => 'Elecciones Estatales de Chiapas 2024',
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ]

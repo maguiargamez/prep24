@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Parties;
 
-use App\Models\Election;
-use App\Models\PartyCoalition;
+use App\Models\PrepElection;
+use App\Models\PrepPartyCoalition;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +18,7 @@ class PartyForm extends Component
 
     public $logo;
     public $currentRouteName= '';
-    public PartyCoalition $partyCoalition;
+    public PrepPartyCoalition $partyCoalition;
     protected $rules = [ 
         'logo'=> ['image', 'max:2048'], 
         'partyCoalition.election_id'=> ['required'],
@@ -33,7 +33,7 @@ class PartyForm extends Component
     }
 
 
-    public function mount(PartyCoalition $party)
+    public function mount(PrepPartyCoalition $party)
     {
         
         $this->currentRouteName= Route::currentRouteName();
@@ -49,7 +49,7 @@ class PartyForm extends Component
     public function render()
     {
         return view('livewire.parties.party-form',[
-            'elections' => Election::pluck('description', 'id'),    
+            'elections' => PrepElection::pluck('description', 'id'),    
         ]);
     }
 

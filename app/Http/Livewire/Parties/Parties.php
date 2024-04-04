@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Parties;
 use Livewire\Component;
 use App\Http\Traits\WithSorting;
 use App\Http\Traits\WithSelectionItems;
-use App\Models\PartyCoalition;
+use App\Models\PrepPartyCoalition;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
 
@@ -65,7 +65,7 @@ class Parties extends Component
 
     public function getItemsQueryProperty()
     {
-        return PartyCoalition::query()
+        return PrepPartyCoalition::query()
             ->search(trim($this->search))
             ->with('election')
             ->orderBy($this->sortBy, $this->sortDirection);
@@ -78,13 +78,13 @@ class Parties extends Component
 
     public function destroy($id)
     {
-        PartyCoalition::find($id)->delete();
+        PrepPartyCoalition::find($id)->delete();
     }
 
     public function destroySelected(){
 
         foreach($this->selectedItems as $key => $idItem){
-            PartyCoalition::find((int)$idItem)->delete();
+            PrepPartyCoalition::find((int)$idItem)->delete();
         }
         $this->resetPage();
     }

@@ -15,47 +15,29 @@ class PrepCandidateSeeder extends Seeder
     {
         $currentDate= date('Y-m-d h:m:s');
         PrepCandidate::insert([
-            [
+            [                
                 'prep_election_id'=> 1,
-                'prep_party_coalition_id'=> 12,
-                'name' => 'José Antonio Aguilar Bodegas',
-                'photo' => 'img/candidatos/jose_aguilar.jpg',
+                'prep_party_coalition_id'=> 2,
+                'name' => 'Oscar Eduardo Ramírez Aguilar',
+                'photo' => 'img/candidatos/oscar_eduardo_ramirez_aguilar.jpg',
                 'is_special'=> false,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ],
             [
                 'prep_election_id'=> 1,
-                'name' => 'Roberto Albores Gleason',
-                'prep_party_coalition_id'=> 20,
-                'photo' => 'img/candidatos/roberto_albores.jpg',
+                'name' => 'Karla Irasema Muñoz Balanzar',
+                'prep_party_coalition_id'=> 1,
+                'photo' => 'img/candidatos/karla_irasema_munoz_balanzar.jpg',
                 'is_special'=> false,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ],
             [
                 'prep_election_id'=> 1,
-                'name' => 'Rutilio Escandón Cadenas',
-                'prep_party_coalition_id'=> 16,
-                'photo' => 'img/candidatos/rutilio_escandon.jpg',
-                'is_special'=> false,
-                'created_at' => $currentDate,
-                'updated_at' => $currentDate,
-            ],
-            [
-                'prep_election_id'=> 1,
-                'prep_party_coalition_id'=> 21,
-                'name' => 'Fernando Castellanos Cal y Mayor',
-                'photo' => 'img/candidatos/fernando_castellanos.jpg',
-                'is_special'=> false,
-                'created_at' => $currentDate,
-                'updated_at' => $currentDate,
-            ],
-            [
-                'prep_election_id'=> 1,
-                'name' => 'Jesús Alejo Orantes Ruíz',
-                'prep_party_coalition_id'=> 25,
-                'photo' => 'img/candidatos/jesus_orantes.jpg',
+                'name' => 'Olga Luz Espinosa Morales',
+                'prep_party_coalition_id'=> 6,
+                'photo' => 'img/candidatos/olga_luz_espinosa_morales.jpg',
                 'is_special'=> false,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
@@ -63,7 +45,7 @@ class PrepCandidateSeeder extends Seeder
             [
                 'prep_election_id'=> 1,
                 'name' => 'Candidaturas no registradas',
-                'prep_party_coalition_id'=> 26,
+                'prep_party_coalition_id'=> 10,
                 'photo' => null,
                 'is_special'=> true,
                 'created_at' => $currentDate,
@@ -72,12 +54,12 @@ class PrepCandidateSeeder extends Seeder
             [
                 'prep_election_id'=> 1,
                 'name' => 'Votos nulos',
-                'prep_party_coalition_id'=> 27,
+                'prep_party_coalition_id'=> 11,
                 'photo' => null,
                 'is_special'=> true,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
-            ],
+            ]
         ]);
     }
 }

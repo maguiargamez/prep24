@@ -55,8 +55,8 @@
                                     <div class="row">
                                         <div class="input-group mb-5">
                                             <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                                            <x-select wire:model="candidate.election_id" :options="$elections" placeholder="Seleccionar" id="election_id"></x-select>
-                                            @error('candidate.election_id')
+                                            <x-select wire:model="candidate.prep_election_id" :options="$elections" placeholder="Seleccionar" id="prep_election_id"></x-select>
+                                            @error('candidate.prep_election_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -72,8 +72,8 @@
                                     <div class="row">
                                         <div class="input-group mb-5">
                                             <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                                            <x-select wire:model="candidate.party_coalition_id" :options="$parties" placeholder="Seleccionar" id="party_coalition_id"></x-select>
-                                            @error('candidate.party_coalition_id')
+                                            <x-select wire:model="candidate.prep_party_coalition_id" :options="$parties" placeholder="Seleccionar" id="prep_party_coalition_id"></x-select>
+                                            @error('candidate.prep_party_coalition_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

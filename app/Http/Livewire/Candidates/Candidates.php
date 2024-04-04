@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Http\Traits\WithSorting;
 use App\Models\Candidate;
 use App\Models\Election;
+use App\Models\PrepCandidate;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Route;
 
@@ -68,7 +69,7 @@ class Candidates extends Component
 
     public function getItemsQueryProperty()
     {
-        return Candidate::query()
+        return PrepCandidate::query()
             ->search(trim($this->search))
             ->with('election')
             ->with('partyCoalition')
@@ -82,13 +83,13 @@ class Candidates extends Component
 
     public function destroy($id)
     {
-        Candidate::find($id)->delete();
+        PrepCandidate::find($id)->delete();
     }
 
     public function destroySelected(){
 
         foreach($this->selectedItems as $key => $idItem){
-            Candidate::find((int)$idItem)->delete();
+            PrepCandidate::find((int)$idItem)->delete();
         }
         $this->resetPage();
     }

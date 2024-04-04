@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Candidates;
 
-use App\Models\Candidate;
-use App\Models\Election;
-use App\Models\PartyCoalition;
+use App\Models\PrepCandidate;
+use App\Models\PrepElection;
+use App\Models\PrepPartyCoalition;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -20,11 +20,11 @@ class CandidateForm extends Component
 
     public $photo;
     public $currentRouteName= '';
-    public Candidate $candidate;
+    public PrepCandidate $candidate;
     protected $rules = [ 
         'photo'=> ['image', 'max:2048', 'nullable'], 
-        'candidate.election_id'=> ['required'],
-        'candidate.party_coalition_id'=> ['required'],
+        'candidate.prep_election_id'=> ['required'],
+        'candidate.prep_party_coalition_id'=> ['required'],
         'candidate.name'=> ['required'],
         'candidate.is_active'=> [],
     ];
@@ -35,7 +35,7 @@ class CandidateForm extends Component
     }
 
 
-    public function mount(Candidate $candidate)
+    public function mount(PrepCandidate $candidate)
     {
         
         $this->currentRouteName= Route::currentRouteName();
@@ -51,8 +51,8 @@ class CandidateForm extends Component
     public function render()
     {
         return view('livewire.candidates.candidate-form', [
-            'elections' => Election::pluck('description', 'id'),    
-            'parties' => PartyCoalition::pluck('name', 'id')    
+            'elections' => PrepElection::pluck('description', 'id'),    
+            'parties' => PrepPartyCoalition::pluck('name', 'id')    
         ]);
     }
 
