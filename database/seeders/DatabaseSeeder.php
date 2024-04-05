@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PrepElectionSeeder::class);
         $this->call(PrepPartyCoalitionSeeder::class);
         $this->call(PrepCandidateSeeder::class);  */      
-        $this->call(PrepCandidatePartyCoalitionSeeder::class);
+        //$this->call(PrepCandidatePartyCoalitionSeeder::class);
 
-        //$this->call(PrepPollingPlaceVoteSeeder::class);
+        $this->call(PrepPollingPlaceVoteSeeder::class);
     }
 }

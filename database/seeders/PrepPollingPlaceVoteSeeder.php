@@ -8,6 +8,7 @@ use App\Models\PrepPollingPlaceRecord;
 use App\Models\PrepPollingPlaceVote;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PrepPollingPlaceVoteSeeder extends Seeder
 {
@@ -16,10 +17,10 @@ class PrepPollingPlaceVoteSeeder extends Seeder
      */
     public function run(): void
     {
-        $parties= PrepPartyCoalition::where('prep_election_id', 1)->get();
+        
         $pollingPlaces= CCasilla::get();
-
         foreach($pollingPlaces as $pollingPlace){
+            $parties= PrepPartyCoalition::where('prep_election_id', 1)->orderBy(DB::raw('RAND()'))->get();
             $nominalElectoralRegister= $pollingPlace->lista_nominal;
             $flag= rand(0,1);
             if($flag==1){
@@ -62,6 +63,7 @@ class PrepPollingPlaceVoteSeeder extends Seeder
 
                 if($isCaptured==1){
                     foreach ($parties as $party) {
+
                         if($votesTakenUrn<=0){
                             $votes= 0;
                         }else{                    
