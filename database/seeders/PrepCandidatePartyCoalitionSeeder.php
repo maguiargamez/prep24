@@ -17,13 +17,13 @@ class PrepCandidatePartyCoalitionSeeder extends Seeder
         PrepCandidatePartyCoalition::insert([
             [
                 'prep_candidate_id'=> 1,
-                'prep_party_coalition_id'=> 2,
+                'prep_party_coalition_id'=> 1,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ],
             [
                 'prep_candidate_id'=> 2,
-                'prep_party_coalition_id'=> 1,
+                'prep_party_coalition_id'=> 2,
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ],

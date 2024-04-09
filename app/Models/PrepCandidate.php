@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class PrepCandidate extends Model
 {
@@ -58,29 +59,19 @@ class PrepCandidate extends Model
 
     public static function candidatesAdvance($electionId){
         $candidates= PrepCandidate::select(
-            'candidates.id',
-            'candidates.name',
-            'candidates.photo',
-            'candidates.is_special',
-            'party_coalitions.name as partyName',
-            'party_coalitions.logo as partyLogo',
+            'prep_candidates.id',
+            'prep_candidates.name',
+            DB::raw('replace(replace(prep_candidates.name, " ", "_"), "-", "_") as name_replaced'),
+            'prep_candidates.photo',
+            'prep_candidates.is_special',
+            'prep_party_coalitions.name as partyName',
+            'prep_party_coalitions.logo as partyLogo',
             )
-            ->leftJoin('party_coalitions', 'party_coalitions.id', '=', 'candidates.party_coalition_id')
-            ->where('candidates.election_id', $electionId)
+            ->leftJoin('prep_party_coalitions', 'prep_party_coalitions.id', '=', 'prep_candidates.prep_party_coalition_id')
+            ->where('prep_candidates.prep_election_id', $electionId)
             ->get();
 
-
-
-        foreach ($candidates as $candidate) {
-            $candidatePartyCoallitions= PrepCandidatePartyCoalition::select('party_coalition_id')
-            ->where('candidate_id', $candidate->id)
-            ->pluck('party_coalition_id');
-            $candidate->parties= $candidatePartyCoallitions;
-
-            $votes= PollingPlaceVote::whereIn('party_coalition_id', $candidate->parties)->sum('votes');
-            $candidate->votes= $votes;
-        }
-        //dd($candidates);
+        
         return $candidates;
     }
 

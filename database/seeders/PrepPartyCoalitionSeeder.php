@@ -17,9 +17,9 @@ class PrepPartyCoalitionSeeder extends Seeder
         PrepPartyCoalition::insert([
             [
                 'prep_election_id'=> 1,
-                'short' => 'MC',
-                'name' => 'MC',
-                'logo' => 'img/logos/mc.jpg',
+                'short' => 'FYC',
+                'name' => 'FYC',
+                'logo' => 'img/logos/fyc.jpg',
                 'parties' => null,
                 'is_coalition' => false,
                 'is_independent' => false,
@@ -29,9 +29,9 @@ class PrepPartyCoalitionSeeder extends Seeder
             ],
             [
                 'prep_election_id'=> 1,
-                'short' => 'FYC',
-                'name' => 'FYC',
-                'logo' => 'img/logos/fyc.jpg',
+                'short' => 'MC',
+                'name' => 'MC',
+                'logo' => 'img/logos/mc.jpg',
                 'parties' => null,
                 'is_coalition' => false,
                 'is_independent' => false,

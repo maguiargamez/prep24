@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('prep_election_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('prep_party_coalition_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->smallInteger('ordered')->nullable();
             $table->string('name', 255);
             $table->string('photo', 255)->nullable();
             $table->boolean('is_special')->default(false);

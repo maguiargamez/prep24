@@ -24,12 +24,13 @@ class DatabaseSeeder extends Seeder
         ]);         
         $user->assignRole('prep');*/
 
-
-        /*$this->call(PrepElectionTypeSeeder::class);
+        
+        $this->call(PrepElectionTypeSeeder::class);
         $this->call(PrepElectionSeeder::class);
         $this->call(PrepPartyCoalitionSeeder::class);
-        $this->call(PrepCandidateSeeder::class);  */      
-        //$this->call(PrepCandidatePartyCoalitionSeeder::class);
+        $this->call(PrepCandidateSeeder::class);   
+        $this->call(PrepCandidatePartyCoalitionSeeder::class);
+        
 
         $this->call(PrepPollingPlaceVoteSeeder::class);
     }

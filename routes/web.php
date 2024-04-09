@@ -6,6 +6,7 @@ use App\Http\Livewire\Capture\PollingPlaces\RecordForm as PollingPlacesRecordFor
 use App\Http\Livewire\Capture\PollingPlaces\Records as PollingPlacesRecords;
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\Dashboard\District;
+use App\Http\Livewire\Dashboard\General;
 use App\Http\Livewire\Dashboard\Section;
 use App\Http\Livewire\Elections\ElectionForm;
 use App\Http\Livewire\Elections\Elections;
@@ -54,7 +55,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::prefix('dashboard')->group(function () {
-        Route::get('/entidad', Dashboard::class)->name('dashboard.home');
+        Route::get('/entidad', General::class)->name('dashboard.entity');
         Route::get('/distrito', District::class)->name('dashboard.district');
         Route::get('/seccion', Section::class)->name('dashboard.section');
     });

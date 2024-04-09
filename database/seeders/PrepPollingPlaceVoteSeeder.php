@@ -20,7 +20,8 @@ class PrepPollingPlaceVoteSeeder extends Seeder
         
         $pollingPlaces= CCasilla::get();
         foreach($pollingPlaces as $pollingPlace){
-            $parties= PrepPartyCoalition::where('prep_election_id', 1)->orderBy(DB::raw('RAND()'))->get();
+            //$parties= PrepPartyCoalition::where('prep_election_id', 1)->orderBy(DB::raw('RAND()'))->get();
+            $parties= PrepPartyCoalition::where('prep_election_id', 1)->orderBy("id", "asc")->get();
             $nominalElectoralRegister= $pollingPlace->lista_nominal;
             $flag= rand(0,1);
             if($flag==1){
@@ -66,8 +67,15 @@ class PrepPollingPlaceVoteSeeder extends Seeder
 
                         if($votesTakenUrn<=0){
                             $votes= 0;
-                        }else{                    
-                            $votes= rand(0, 80);
+                        }else{ 
+
+                            if($party->id=1){
+                                $votes= rand(0, 500);
+                            }else{
+                                $votes= rand(0, 80);
+                            }
+                            
+
                             if($votes>$votesTakenUrn){
                                 $votes= rand(0, $votesTakenUrn);
                             }

@@ -16,7 +16,7 @@
     <ul class="breadcrumb breadcrumb-right  fw-semibold fs-base my-1 pt-1">
 
         <li class="breadcrumb-item text-muted">                        
-            <a href="{{ route("dashboard.home") }}" class="text-muted text-hover-success">                
+            <a href="{{ route("dashboard.entity") }}" class="text-muted text-hover-success">                
                 <i class="fa-solid fa-house text-muted"></i>&nbsp;                
                 Inicio
             </a>
