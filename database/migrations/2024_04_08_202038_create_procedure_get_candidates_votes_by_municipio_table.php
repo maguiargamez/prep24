@@ -13,7 +13,7 @@ return new class extends Migration
     {
         $procedure = "
             DROP PROCEDURE IF EXISTS get_candidates_votes_by_municipio;
-            CREATE DEFINER=`root`@`localhost` PROCEDURE `get_candidates_votes_by_municipio`(IN election_id int, IN municipality_id int)
+            CREATE DEFINER=`root`@`localhost` PROCEDURE `get_candidates_votes_by_municipio`(IN election_id int, IN municipality varchar(255))
             BEGIN
             DECLARE filterElection varchar(100);
             DECLARE filterMunicipality varchar(100);    
@@ -25,8 +25,8 @@ return new class extends Migration
                 SET filterElection = CONCAT('where c_casillas.prep_election_id=', election_id, ' ');
             END IF;
             
-            IF !ISNULL(municipality_id) THEN
-                SET filterMunicipality = CONCAT('and c_casillas.id_municipio=', municipality_id, ' ');
+            IF !ISNULL(municipality) THEN
+                SET filterMunicipality = CONCAT('and c_municipio.municipio like \"%', municipality, '%\" ');
             END IF;
             
             SELECT

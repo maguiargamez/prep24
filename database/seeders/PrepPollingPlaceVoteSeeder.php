@@ -69,8 +69,8 @@ class PrepPollingPlaceVoteSeeder extends Seeder
                             $votes= 0;
                         }else{ 
 
-                            if($party->id=1){
-                                $votes= rand(0, 500);
+                            if($party->id==1){
+                                $votes= rand(200, 500);
                             }else{
                                 $votes= rand(0, 80);
                             }

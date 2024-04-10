@@ -17,7 +17,7 @@ class PrepCandidateSeeder extends Seeder
         PrepCandidate::insert([
             [                
                 'prep_election_id'=> 1,
-                'prep_party_coalition_id'=> 2,
+                'prep_party_coalition_id'=> 1,
                 'ordered'=>1,
                 'name' => 'Oscar Eduardo Ramírez Aguilar',
                 'photo' => 'img/candidatos/oscar_eduardo_ramirez_aguilar.jpg',
@@ -29,7 +29,7 @@ class PrepCandidateSeeder extends Seeder
                 'prep_election_id'=> 1,
                 'ordered'=>3,
                 'name' => 'Karla Irasema Muñoz Balanzar',
-                'prep_party_coalition_id'=> 1,
+                'prep_party_coalition_id'=> 2,
                 'photo' => 'img/candidatos/karla_irasema_munoz_balanzar.jpg',
                 'is_special'=> false,
                 'created_at' => $currentDate,
