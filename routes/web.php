@@ -57,6 +57,11 @@ Route::middleware([
     'verified'
 ])->group(function () {
 
+    Route::get('/inicio', function () {
+        return redirect('/dashboard/entidad');
+    });
+
+    //Route::get('/inicio', General::class)->name('dashboard.entity');
     Route::prefix('dashboard')->group(function () {
         Route::get('/entidad', General::class)->name('dashboard.entity');
 
