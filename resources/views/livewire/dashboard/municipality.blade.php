@@ -82,7 +82,7 @@
                                 <tr class="text-gray-700 border-bottom-1 border-gray-200 ">                                    
                                     <td>
                                         <a href="{{ route('dashboard.municipality.section', $value->id_municipio) }}">
-                                            <span class="text-gray-800 h5">{{ $value->municipio }}</span>
+                                            <span class="text-gray-800 h5"><u>{{ $value->municipio }}</u></span>
                                         </a>
 
                                     </td>

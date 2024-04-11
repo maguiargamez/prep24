@@ -5,6 +5,7 @@
     'color'=> "",
     'advance'=> 0,
     'title'=> "",
+    'titleAdvance'=> "",
     'candidates'=> [],
     'votosCandidatos'=> [],
     ])
@@ -13,7 +14,14 @@
 //dd($currentRouteName);
 @endphp
 <div class="mb-10">
-    <h1 class="fs-2x text-dark mb-2">Avance</h1>    
+    <h1 class="fs-2x text-dark mb-2">
+        <span class="text-danger">
+            @if($titleAdvance!="")
+                {{ $titleAdvance }} -
+            @endif            
+        </span>
+        Avance
+    </h1>    
 </div>
 
 <div class="row g-10">

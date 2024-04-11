@@ -2,7 +2,8 @@
     'disabled'=> false,
     'placeholder'=> 'Select',
     'options' => [],
-    'class' => "form-select p-2 "
+    'class' => "form-select p-2 ",
+    'default' => true
     ])
 
 @error($attributes["wire:model"]) 
@@ -12,7 +13,10 @@
 @enderror
 
 <select {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class'=>$class]) !!}>
-    <option value="" selected>{{ $placeholder }}</option>
+    @if($default)
+        <option value="" selected>{{ $placeholder }}</option>
+    @endif
+
     @foreach ($options as $id => $label)
         <option value="{{ $id }}">{{ $label }}</option>
     @endforeach

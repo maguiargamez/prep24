@@ -95,8 +95,22 @@ class ViewPollingPlaceRecords extends Model
         $query= ViewPollingPlaceRecords::select('federal_district_key', 'federal_district', 'local_district_key', 'local_district', 'section', 'type_key', 'digitized_record','observations')->groupBy('local_district_key');
     }
 
-    public static function getCaptureRecords($electionId=null){
-        $query= ViewPollingPlaceRecords::where('is_captured', true)->count();
+    public static function getCaptureRecords($electionId=null, $localDistrictKey=null, $municipalityKey=null, $section= null){
+        $query= ViewPollingPlaceRecords::select('*');
+
+        if($localDistrictKey){
+            $query= $query->where('local_district_key', $localDistrictKey);
+        }   
+        
+        if($municipalityKey){
+            $query= $query->where('municipality_key', $municipalityKey);
+        }  
+
+        if($section){
+            $query= $query->where('section', $section);
+        }
+        
+        $query= $query->where('is_captured', true)->count();
         return $query;
     }
 
@@ -105,8 +119,24 @@ class ViewPollingPlaceRecords extends Model
         return $query;
     }
 
-    public static function getTotalRecords($electionId=null){
-        $query= ViewPollingPlaceRecords::count();
+    public static function getTotalRecords($electionId=null, $localDistrictKey=null, $municipalityKey=null, $section= null){
+        $query= ViewPollingPlaceRecords::select('*');
+
+        if($localDistrictKey){
+            $query= $query->where('local_district_key', $localDistrictKey);
+        }   
+        
+        if($municipalityKey && $municipalityKey){
+            
+            $query= $query->where('municipality_key', $municipalityKey);
+        }  
+
+        if($section){
+            $query= $query->where('section', $section);
+        }  
+        
+        $query= $query->count();
+
         return $query;
     }
 
@@ -114,5 +144,7 @@ class ViewPollingPlaceRecords extends Model
         $query= ViewPollingPlaceRecords::count();
         return $query;
     }
+
+    
 
 }

@@ -14,8 +14,8 @@
                 <div class="input-group mb-5">
 
                     <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                    <x-select wire:model="municipalityId" :options="$municipalities" placeholder="Seleccionar" id="municipalityId" :default=false></x-select>
-                    @error('municipalityId')
+                    <x-select wire:model="sectionId" :options="$sections" placeholder="Seleccionar" id="municipalityId" :default=false></x-select>
+                    @error('sectionId')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -37,7 +37,7 @@
 
 
                 <x-dashboard.header 
-                :titleAdvance="$municipality"
+                :titleAdvance="$advanceTitle"
                 title="Secciones por Municipio"
                 :capturedRecords="$capturedRecords"
                 :totalRecords="$totalRecords"
@@ -69,7 +69,7 @@
                     <table class="table table-row-bordered table-row-gray-400 table-hover  gs-4 gy-4 gx-4">
                         <thead>
                             <tr class="fw-bold fs-6 border-bottom-2 border-gray-800">
-                                <th class="min-w-250px">Sección</th>
+                                <th class="min-w-250px">Casilla</th>
                                 @php
                                     $total= 0;
                                     $totales= [];
@@ -92,13 +92,11 @@
 
                         <tbody>
 
-                            @forelse ( $votosCandidatosSecciones as $key=> $value )                                
+                            @forelse ( $votosCandidatosCasillas as $key=> $value )                                
                             
                                 <tr class="text-gray-700 border-bottom-1 border-gray-200 ">                                    
-                                    <td>                                        
-                                        <a href="{{ route('dashboard.municipality.section.polling-place', [$value->id_municipio, (int)$value->seccion]) }}">
-                                            <span class="text-gray-800 h5"><u>{{ $value->seccion }}</u></span>
-                                        </a>
+                                    <td>
+                                        <span class="text-gray-800 h5">{{ $value->casilla }}</span>
                                     </td>
 
                                     @foreach ($candidates as $candidate)
