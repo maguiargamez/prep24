@@ -70,11 +70,10 @@ class PrepPollingPlaceVoteSeeder extends Seeder
                         }else{ 
 
                             if($party->id==1){
-                                $votes= rand(200, 500);
+                                $votes= rand(300, $votesTakenUrn);
                             }else{
                                 $votes= rand(0, 80);
-                            }
-                            
+                            }                            
 
                             if($votes>$votesTakenUrn){
                                 $votes= rand(0, $votesTakenUrn);
@@ -86,6 +85,7 @@ class PrepPollingPlaceVoteSeeder extends Seeder
                             'prep_party_coalition_id' => $party->id,
                             'votes' => $votes
                         ]);
+                       
                         $votesTakenUrn-= $votes;
                     }
                 }

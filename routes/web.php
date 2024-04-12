@@ -12,6 +12,7 @@ use App\Http\Livewire\Dashboard\General;
 use App\Http\Livewire\Dashboard\Municipality;
 use App\Http\Livewire\Dashboard\MunicipalityPollingPlace;
 use App\Http\Livewire\Dashboard\MunicipalitySection;
+use App\Http\Livewire\Dashboard\PollingPlace;
 use App\Http\Livewire\Dashboard\Section;
 use App\Http\Livewire\Elections\ElectionForm;
 use App\Http\Livewire\Elections\Elections;
@@ -75,9 +76,9 @@ Route::middleware([
         Route::get('/municipio/{id}/seccion', MunicipalitySection::class)->name('dashboard.municipality.section');
         Route::get('/municipio/{municipalityId}/casillas/{sectionId}', MunicipalityPollingPlace::class)->name('dashboard.municipality.section.polling-place');
 
-
-        Route::get('/seccion', Section::class)->name('dashboard.section');
-        Route::get('/seccion/{id}/casillas', Section::class)->name('dashboard.section');
+        Route::get('/casillas', PollingPlace::class)->name('dashboard.polling-places');
+        /*Route::get('/seccion', Section::class)->name('dashboard.section');
+        Route::get('/seccion/{id}/casillas', Section::class)->name('dashboard.section');*/
     });
 
     

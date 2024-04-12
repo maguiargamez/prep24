@@ -12,7 +12,6 @@ trait GeneralStatistics
     public function setValuesGeneralStatistic()
     {
         $this->totalRecords= ViewPollingPlaceRecords::getTotalRecords($this->electionId, $this->districtId, $this->municipalityId, $this->sectionId);
-        
         $this->capturedRecords= ViewPollingPlaceRecords::getCaptureRecords($this->electionId, $this->districtId, $this->municipalityId, $this->sectionId);
 
         if($this->totalRecords>0){
@@ -25,12 +24,9 @@ trait GeneralStatistics
 
         $results= (array)DB::select("CALL get_candidates_votes_by_general(?,?,?,?)", [$this->electionId, $this->municipalityId, $this->districtId, $this->sectionId]);
 
-        
 
-        if(count($results)>0){
-            
+        if(count($results)>0){            
             $this->votosCandidatos= (array)$results[0];
-            //dd($this->votosCandidatos); 
 
         }else{
             $array["prep_election_id"]= $this->electionId;
@@ -39,9 +35,7 @@ trait GeneralStatistics
                 $array[$candidate->name_replaced]= 0;
             }
             $this->votosCandidatos= $array;
-        }
-        
-
+        } 
         
     }
 

@@ -36,7 +36,7 @@ class DistrictSection extends Component
     public $color="success";
 
     protected $paginationTheme = 'bootstrap';
-    public $title = 'Casillas';
+    public $title = 'Dashboard por Distrito';
     public $breadcrumb = [
         "Dashboard"=> null,
         "Distrito" => 'dashboard.district', 

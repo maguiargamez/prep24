@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         $procedure = "
-            DROP PROCEDURE IF EXISTS get_candidates_votes_by_casillas;
-            CREATE DEFINER=`root`@`localhost` PROCEDURE `get_candidates_votes_by_casillas`(IN election_id int, IN municipality_id int, IN district int, IN section int)
+            DROP PROCEDURE IF EXISTS get_candidates_votes_by_casillas_id;
+            CREATE DEFINER=`root`@`localhost` PROCEDURE `get_candidates_votes_by_casillas_id`(IN election_id int, IN municipality_id int, IN district int, IN section int)
             BEGIN
                                         DECLARE filterElection varchar(100);
                                         DECLARE filterMunicipality varchar(100); 
@@ -66,8 +66,6 @@ return new class extends Migration
                                             c_casillas.dtto_loc as distrito, c_casillas.seccion, 
                                             CONCAT_WS(\" \", c_casillas.seccion, c_casillas.tipo_casilla) as casilla,  
                                             c_casillas.tipo_casilla,
-                                            prep_polling_place_records.is_captured,
-                                            prep_polling_place_records.capture_source,
                                             ', @sql, ',
                                             sum(votes) as total
                                             from c_casillas
@@ -78,7 +76,7 @@ return new class extends Migration
                                                 left join prep_candidate_party_coalitions on prep_party_coalitions.id = prep_candidate_party_coalitions.prep_party_coalition_id  
                                                 left join prep_candidates on prep_candidates.id = prep_candidate_party_coalitions.prep_candidate_id  
                                                 ', filterElection,' ', filterMunicipality,' ', filterDistrict,' ', filterSection, '
-                                            group by c_casillas.tipo_casilla order by c_casillas.seccion asc, c_casillas.dtto_loc asc, c_casillas.id_municipio asc
+                                            group by c_casillas.id order by c_casillas.seccion asc, c_casillas.dtto_loc asc, c_casillas.id_municipio asc
                                         ');
                                         PREPARE stmt FROM @sql;
                                         EXECUTE stmt;
@@ -89,5 +87,5 @@ return new class extends Migration
         DB::unprepared($procedure);
     }
 
-
+   
 };

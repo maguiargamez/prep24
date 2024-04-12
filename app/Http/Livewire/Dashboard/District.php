@@ -12,9 +12,9 @@ use App\Models\PrepCandidate;
 use App\Models\ViewPollingPlaceRecords;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
 class District extends Component
 {
-    use WithPagination, WithSorting;
     use WithPagination, WithSorting, WithSelectionItems, SessionHandler, GeneralStatistics;
 
     public $currentRouteName= '';    
@@ -33,7 +33,7 @@ class District extends Component
     public $color="success";
 
     protected $paginationTheme = 'bootstrap';
-    public $title = 'Casillas';
+    public $title = 'Dashboard por Distrito';
     public $breadcrumb = [
         "Dashboard"=> null,
         "Distrito" => 'dashboard.district',   

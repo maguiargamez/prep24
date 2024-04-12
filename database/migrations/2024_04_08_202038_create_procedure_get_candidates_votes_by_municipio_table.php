@@ -26,7 +26,7 @@ return new class extends Migration
             END IF;
             
             IF !ISNULL(municipality) THEN
-                SET filterMunicipality = CONCAT('and c_municipio.municipio like "%', municipality, '%" ');
+                SET filterMunicipality = CONCAT('and c_municipio.municipio like \"%', municipality, '%\" ');
             END IF;
             
             SELECT

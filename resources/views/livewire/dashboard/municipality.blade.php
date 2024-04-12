@@ -90,7 +90,12 @@
                                     @foreach ($candidates as $candidate)
                                     <td class="min-w-100px text-center">
                                         <span class="@if($candidate->name_replaced=="Oscar_Eduardo_Ramírez_Aguilar") text-danger h5 @else text-gray-800 @endif">
-                                            {{ number_format($value->{$candidate->name_replaced}, 0) }} 
+                                            @if($value->{$candidate->name_replaced})
+                                                {{ number_format($value->{$candidate->name_replaced}, 0) }} 
+                                            @else
+                                                -
+                                            @endif
+
                                     </span>
                                     </td>
                                         @php
@@ -101,7 +106,13 @@
 
 
                                     <td class="min-w-200px text-center">
-                                        <span class="text-gray-800">{{ number_format($value->total,0) }} </span>                                    
+                                        <span class="text-gray-800">
+                                            @if($value->total)
+                                                {{ number_format($value->total,0) }} 
+                                            @else
+                                                -
+                                            @endif
+                                        </span>                                    
                                     </td>
                                     
 

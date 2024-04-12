@@ -33,7 +33,7 @@ class General extends Component
     public $color="success";
 
     protected $paginationTheme = 'bootstrap';
-    public $title = 'Casillas';
+    public $title = 'Dashboard por Entidad';
     public $breadcrumb = [
         "Dashboard"=> null,
         "General" => 'dashboard.entity',   

@@ -36,7 +36,7 @@ class MunicipalitySection extends Component
     public $color="success";
 
     protected $paginationTheme = 'bootstrap';
-    public $title = 'Casillas';
+    public $title = 'Dashboard por Municipios';
     public $breadcrumb = [
         "Dashboard"=> null,
         "Municipio" => 'dashboard.municipality', 
