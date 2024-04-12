@@ -6,6 +6,8 @@ use App\Http\Livewire\Capture\PollingPlaces\RecordForm as PollingPlacesRecordFor
 use App\Http\Livewire\Capture\PollingPlaces\Records as PollingPlacesRecords;
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\Dashboard\District;
+use App\Http\Livewire\Dashboard\DistrictPollingPlace;
+use App\Http\Livewire\Dashboard\DistrictSection;
 use App\Http\Livewire\Dashboard\General;
 use App\Http\Livewire\Dashboard\Municipality;
 use App\Http\Livewire\Dashboard\MunicipalityPollingPlace;
@@ -66,9 +68,8 @@ Route::middleware([
         Route::get('/entidad', General::class)->name('dashboard.entity');
 
         Route::get('/distrito', District::class)->name('dashboard.district');
-        /*Route::get('/distrito/{id}/municipio', District::class)->name('dashboard.district');
-        Route::get('/distrito/{id}/seccion', District::class)->name('dashboard.district');
-        Route::get('/distrito/{id}/casillas', District::class)->name('dashboard.district');*/
+        Route::get('/distrito/{id}/seccion', DistrictSection::class)->name('dashboard.district.section');
+        Route::get('/distrito/{districtId}/casillas/{sectionId}', DistrictPollingPlace::class)->name('dashboard.district.section.polling-place');
 
         Route::get('/municipio', Municipality::class)->name('dashboard.municipality');
         Route::get('/municipio/{id}/seccion', MunicipalitySection::class)->name('dashboard.municipality.section');

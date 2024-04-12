@@ -173,7 +173,7 @@ class RecordPendingsIndex extends Component
     }
 
     public function downloadFile($file){
-        return response()->download(public_path($file));
+        return response()->download(storage_path('app/'.$file));
     }
 
 }

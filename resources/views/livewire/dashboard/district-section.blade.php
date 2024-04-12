@@ -14,8 +14,8 @@
                 <div class="input-group mb-5">
 
                     <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                    <x-select wire:model="sectionId" :options="$sections" placeholder="Seleccionar" id="municipalityId" :default=false></x-select>
-                    @error('sectionId')
+                    <x-select wire:model="districtId" :options="$districts" placeholder="Seleccionar" id="districtId" :default=false></x-select>
+                    @error('districtId')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -37,8 +37,8 @@
 
 
                 <x-dashboard.header 
-                :titleAdvance="$advanceTitle"
-                title="Secciones por Municipio"
+                :titleAdvance="$district"
+                title="Secciones por Distito"
                 :capturedRecords="$capturedRecords"
                 :totalRecords="$totalRecords"
                 :color="$color"
@@ -69,8 +69,7 @@
                     <table class="table table-row-bordered table-row-gray-400 table-hover  gs-4 gy-4 gx-4">
                         <thead>
                             <tr class="fw-bold fs-6 border-bottom-2 border-gray-800">
-                                <th class="min-w-250px">Casilla</th>
-                                <th class="min-w-150px text-center">Acta digitalizada</th>
+                                <th class="min-w-250px">Sección</th>
                                 @php
                                     $total= 0;
                                     $totales= [];
@@ -93,31 +92,15 @@
 
                         <tbody>
 
-                            @forelse ( $votosCandidatosCasillas as $key=> $value )                                
+                            @forelse ( $votosCandidatosSecciones as $key=> $value )                                
                             
                                 <tr class="text-gray-700 border-bottom-1 border-gray-200 ">                                    
-                                    <td>
-                                        <span class="text-gray-800 h5">{{ $value->casilla }}</span>
+                                    <td>                                        
+                                        <a href="{{ route('dashboard.district.section.polling-place', [(int)$value->distrito, (int)$value->seccion]) }}">
+                                            <span class="text-gray-800 h5"><u>Sección {{ $value->seccion }}</u></span>
+                                        </a>
                                     </td>
-                                    <td class="text-center">
 
-                                        @if($value->is_captured)
-                                            @if($value->capture_source==2)             
-                                                <i class="fa-solid fa-mobile-screen-button fs-4"></i>
-                                            @else
-                                                <i class="fa-solid fa-computer fs-4"></i>
-                                            @endif 
-                                        @else
-                                            <i class="fa-solid fa-clock fs-4"></i>
-                                        @endif
-
-                                        @if($value->record)
-                                            <a wire:click.prevent="downloadFile('{{ $value->record }}')" class="text-primary fw-bold" href="#">
-                                                <i class="fa-solid fa-file text-primary fs-4"></i>                                                        
-                                            </a>
-                                        @endif
-
-                                    </td>
                                     @foreach ($candidates as $candidate)
                                     <td class="min-w-100px text-center">
                                         <span class="@if($candidate->name_replaced=="Oscar_Eduardo_Ramírez_Aguilar") text-danger h5 @else text-gray-800 @endif">
@@ -146,9 +129,6 @@
                                     
                                 <td>
                                     <span class="text-gray-800 h5">Total de Votos</span>
-                                </td>
-                                <td>
-                                    
                                 </td>
                                 @foreach ($candidates as $candidate)
                                 <td class="min-w-100px text-center">

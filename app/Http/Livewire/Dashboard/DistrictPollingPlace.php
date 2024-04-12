@@ -15,7 +15,7 @@ use App\Models\ViewPollingPlaceRecords;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-class MunicipalityPollingPlace extends Component
+class DistrictPollingPlace extends Component
 {
     use WithPagination, WithSorting, WithSelectionItems, SessionHandler, GeneralStatistics;
 
@@ -25,7 +25,8 @@ class MunicipalityPollingPlace extends Component
     public $electionId= 1;
     public $municipalityId= null; 
     public $municipality= null; 
-    public $districtId= null; 
+    public $districtId= null;  
+    public $district= null;  
     public $sectionId= null;
     public $candidates= [];
     public $advanceTitle= "";
@@ -39,33 +40,31 @@ class MunicipalityPollingPlace extends Component
     public $title = 'Casillas';
     public $breadcrumb = [
         "Dashboard"=> null,
-        "Municipio" => 'dashboard.municipality', 
-        "Secciones" => 'dashboard.municipality.section',
+        "Distrito" => 'dashboard.district',
     ];
 
     protected $listeners = [
         'refresh-data' => '$refresh'
     ];
 
-    public function mount($municipalityId,$sectionId)
+    public function mount($districtId,$sectionId)
     {
+        $this->districtId= $districtId;
         $this->sectionId= $sectionId;
-        $this->municipalityId= $municipalityId;
+        $this->district= "Distrito ".$districtId;  
 
-        $this->municipality= CMunicipio::find($this->municipalityId)->municipio;
-
-        $this->advanceTitle= $this->municipality.". Sección ".$sectionId;
-        $this->breadcrumb["Secciones"]= ["dashboard.municipality.section", $this->municipalityId];        
-        $this->breadcrumb["Casillas"]= "dashboard.municipality.section.polling-place";        
+        $this->advanceTitle= $this->district.". Sección ".$sectionId;
+        $this->breadcrumb["Secciones"]= ["dashboard.district.section", $this->districtId];        
+        $this->breadcrumb["Casillas"]= "dashboard.district.section.polling-place";        
         $this->currentRouteName= Route::currentRouteName();
         $this->setValuesGeneralStatistic();  
     }
 
     public function render()
     {
-        return view('livewire.dashboard.municipality-polling-place',[
+        return view('livewire.dashboard.district-polling-place',[
             'votosCandidatosCasillas' => $this->items,
-            'sections'=> CCasilla::getSectionsCombo($this->municipalityId)
+            'sections'=> CCasilla::getSectionsCombo(null, $this->districtId)
         ]);
     }
 
@@ -79,22 +78,21 @@ class MunicipalityPollingPlace extends Component
     {
         $this->resetPage();
         $this->setValuesGeneralStatistic();
-        $this->municipality= CMunicipio::find($this->municipalityId)->municipio;
-        $this->advanceTitle= $this->municipality." - Sección ".$this->sectionId;
-        
+        $this->district= "Distrito ".$this->districtId;
+        $this->advanceTitle= $this->district.". Sección ".$this->sectionId;
     }
 
     public function getItemsProperty()
     {
-        return (array)DB::select("CALL get_candidates_votes_by_casillas(?, ?, ?, ?)", [$this->electionId, $this->municipalityId, null, $this->sectionId]);
+        return (array)DB::select("CALL get_candidates_votes_by_casillas(?, ?, ?, ?)", [$this->electionId, null, $this->districtId, $this->sectionId]);
     }
 
 
     public function downloadFile($file){
         $this->resetPage();
         $this->setValuesGeneralStatistic();
-        $this->municipality= CMunicipio::find($this->municipalityId)->municipio;
-        $this->advanceTitle= $this->municipality." - Sección ".$this->sectionId;
+        $this->district= "Distrito ".$this->districtId;
+        $this->advanceTitle= $this->district.". Sección ".$this->sectionId;
         return response()->download(storage_path('app/'.$file));
     }
 }

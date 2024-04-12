@@ -39,7 +39,7 @@ return new class extends Migration
                             END IF;
                             
                             IF !ISNULL(section) THEN
-                                SET filterSection = CONCAT('and c_casillas.seccion like "%', section, '%" ');
+                                SET filterSection = CONCAT('and c_casillas.seccion like \"%', section, '%\" ');
                             END IF;
                             
                             SELECT

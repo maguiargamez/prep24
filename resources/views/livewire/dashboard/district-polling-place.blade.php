@@ -38,7 +38,7 @@
 
                 <x-dashboard.header 
                 :titleAdvance="$advanceTitle"
-                title="Secciones por Municipio"
+                title="Secciones por Distrito"
                 :capturedRecords="$capturedRecords"
                 :totalRecords="$totalRecords"
                 :color="$color"

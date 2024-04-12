@@ -8,13 +8,15 @@ use Livewire\WithPagination;
 use App\Http\Traits\WithSorting;
 use App\Http\Traits\SessionHandler;
 use App\Http\Traits\WithSelectionItems;
+use App\Models\CCasilla;
+use App\Models\CMunicipio;
 use App\Models\PrepCandidate;
 use App\Models\ViewPollingPlaceRecords;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-class District extends Component
+
+class DistrictSection extends Component
 {
-    use WithPagination, WithSorting;
     use WithPagination, WithSorting, WithSelectionItems, SessionHandler, GeneralStatistics;
 
     public $currentRouteName= '';    
@@ -22,6 +24,7 @@ class District extends Component
     public $search = null;
     public $electionId= 1;
     public $municipalityId= null; 
+    public $district= null; 
     public $districtId= null; 
     public $sectionId= null;
     public $candidates= [];
@@ -36,23 +39,27 @@ class District extends Component
     public $title = 'Casillas';
     public $breadcrumb = [
         "Dashboard"=> null,
-        "Distrito" => 'dashboard.district',   
+        "Distrito" => 'dashboard.district', 
     ];
 
     protected $listeners = [
         'refresh-data' => '$refresh'
     ];
 
-    public function mount()
+    public function mount($id)
     {
+        $this->districtId= $id;
+        $this->district= "Distrito ".$id;        
+        $this->breadcrumb["Secciones"]= "dashboard.district.section";        
         $this->currentRouteName= Route::currentRouteName();
-        $this->setValuesGeneralStatistic();         
+        $this->setValuesGeneralStatistic();  
     }
 
     public function render()
     {
-        return view('livewire.dashboard.district', [
-            'votosCandidatosMunicipios' => $this->items
+        return view('livewire.dashboard.district-section', [
+            'votosCandidatosSecciones' => $this->items,
+            'districts'=> CCasilla::getDistrictsComboRoman()
         ]);
     }
 
@@ -60,10 +67,18 @@ class District extends Component
     {
         $this->resetPage();
         $this->setValuesGeneralStatistic();
+        
+    }
+
+    public function updatedDistrictId()
+    {
+        $this->resetPage();
+        $this->setValuesGeneralStatistic();
+        $this->district= "Distrito ".$this->districtId;        
     }
 
     public function getItemsProperty()
     {
-        return (array)DB::select("CALL get_candidates_votes_by_distrito(?, ?, ?)", [$this->electionId, null, $this->search]);
+        return (array)DB::select("CALL get_candidates_votes_by_seccion(?, ?, ?, ?)", [$this->electionId, null, $this->districtId, $this->search]);
     }
 }

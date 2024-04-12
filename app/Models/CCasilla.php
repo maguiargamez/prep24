@@ -69,7 +69,8 @@ class CCasilla extends Model
         }
 
         if($district){
-            $sections= $sections->where('c_casillas.dtto_loc', $district);
+            //$sections= $sections->where('c_casillas.dtto_loc', '', $district);
+            $sections= $sections->where(DB::raw('CONVERT(c_casillas.dtto_loc,UNSIGNED INTEGER)'), $district);
         }
 
         $sections= $sections    

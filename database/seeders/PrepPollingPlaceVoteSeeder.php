@@ -55,7 +55,7 @@ class PrepPollingPlaceVoteSeeder extends Seeder
                     $polling_place_record->votes_matched= false;
                 }
                 if($isDigitized==1){
-                    $polling_place_record->digitized_record= '/img/actas/acta.jpeg';
+                    $polling_place_record->digitized_record= '/actas/acta.jpeg';
                 }
                 $polling_place_record->is_validated= $isValidated;
                 $polling_place_record->is_captured= $isCaptured;

@@ -107,7 +107,7 @@ class ViewPollingPlaceRecords extends Model
         }  
 
         if($section){
-            $query= $query->where('section', $section);
+            $query= $query->where(DB::raw('CONVERT(section,UNSIGNED INTEGER)'), $section);
         }
         
         $query= $query->where('is_captured', true)->count();
@@ -126,14 +126,17 @@ class ViewPollingPlaceRecords extends Model
             $query= $query->where('local_district_key', $localDistrictKey);
         }   
         
-        if($municipalityKey && $municipalityKey){
+        if($municipalityKey){
             
             $query= $query->where('municipality_key', $municipalityKey);
         }  
 
         if($section){
-            $query= $query->where('section', $section);
+            //$query= $query->where('section', $section);
+            $query= $query->where(DB::raw('CONVERT(section,UNSIGNED INTEGER)'), $section);
         }  
+
+        //dd($query);
         
         $query= $query->count();
 

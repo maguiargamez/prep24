@@ -12,6 +12,7 @@ trait GeneralStatistics
     public function setValuesGeneralStatistic()
     {
         $this->totalRecords= ViewPollingPlaceRecords::getTotalRecords($this->electionId, $this->districtId, $this->municipalityId, $this->sectionId);
+        
         $this->capturedRecords= ViewPollingPlaceRecords::getCaptureRecords($this->electionId, $this->districtId, $this->municipalityId, $this->sectionId);
 
         if($this->totalRecords>0){
