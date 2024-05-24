@@ -15,10 +15,17 @@ class PrepElectionSeeder extends Seeder
     {
         $currentDate= date('Y-m-d h:m:s');
         PrepElection::insert([
-            [
+            /*[
                 'prep_election_type_id'=> 1,
                 'state_id' => 1,
                 'description' => 'Elecciones Estatales de Chiapas 2024',
+                'created_at' => $currentDate,
+                'updated_at' => $currentDate,
+            ]*/
+            [
+                'prep_election_type_id'=> 1,
+                'state_id' => 1,
+                'description' => 'Elecciones Municipales San Fernando 2024',
                 'created_at' => $currentDate,
                 'updated_at' => $currentDate,
             ]

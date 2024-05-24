@@ -16,7 +16,9 @@ return new class extends Migration
             CREATE DEFINER=`root`@`localhost` PROCEDURE `get_candidates_votes_by_municipio`(IN election_id int, IN municipality varchar(255))
             BEGIN
             DECLARE filterElection varchar(100);
-            DECLARE filterMunicipality varchar(100);    
+            DECLARE filterMunicipality varchar(100);  
+            
+            SET group_concat_max_len = 18446744073709551615;
             SET @sql = NULL;   
             SET filterMunicipality = '';
             SET filterElection = 'where 1=1 ';

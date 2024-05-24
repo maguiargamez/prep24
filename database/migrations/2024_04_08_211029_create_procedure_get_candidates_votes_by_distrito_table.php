@@ -19,6 +19,7 @@ return new class extends Migration
             DECLARE filterMunicipality varchar(100); 
             DECLARE filterDistrict varchar(100);  
             
+            SET group_concat_max_len = 18446744073709551615;
             SET @sql = NULL;  
             SET filterDistrict = \"\";
             SET filterMunicipality = \"\";

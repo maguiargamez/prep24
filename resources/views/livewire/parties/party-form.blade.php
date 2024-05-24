@@ -55,8 +55,8 @@
                                     <div class="row">
                                         <div class="input-group mb-5">
                                             <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-arrows-spin"></i></span>
-                                            <x-select wire:model="partyCoalition.election_id" :options="$elections" placeholder="Seleccionar" id="election_id"></x-select>
-                                            @error('partyCoalition.election_id')
+                                            <x-select wire:model="partyCoalition.prep_election_id" :options="$elections" placeholder="Seleccionar" id="prep_election_id"></x-select>
+                                            @error('partyCoalition.prep_election_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

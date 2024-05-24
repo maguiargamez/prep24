@@ -21,7 +21,7 @@ class PartyForm extends Component
     public PrepPartyCoalition $partyCoalition;
     protected $rules = [ 
         'logo'=> ['image', 'max:2048'], 
-        'partyCoalition.election_id'=> ['required'],
+        'partyCoalition.prep_election_id'=> ['required'],
         'partyCoalition.name'=> ['required'],
         'partyCoalition.is_coalition'=> ['required'],
         'partyCoalition.is_independent'=> ['required'],
